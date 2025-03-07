@@ -1,0 +1,1 @@
+#include<stdio.h>void selectSort(int a[], int n){    int i, j, minIndex, temp;    for (i = 0; i < n - 1; i++)    {        minIndex = i;             	  //初始最小值位置        for (j = i + 1; j < n; j++)       //在a[i..n-1]中找最小数            if (a[j] < a[minIndex])                minIndex = j;    }
