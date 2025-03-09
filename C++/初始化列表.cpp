@@ -19,7 +19,6 @@ public:
     void Print() {
         cout << "英雄：" << m_Name << "的血量是" << m_Hp << ",速度是" << m_Speed << endl;
     }
-
 private:
     string m_Name;
     int m_Hp;
