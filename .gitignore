@@ -225,3 +225,8 @@ start.bat
 *.txt
 !config.txt
 .vs/
+C++/选择排序/FileName.cpp
+C++/选择排序/选择排序.vcxproj.filters
+.gitignore
+C++/选择排序/选择排序.sln
+C++/选择排序/选择排序.vcxproj
