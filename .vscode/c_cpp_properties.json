@@ -10,7 +10,7 @@
                 "UNICODE",
                 "_UNICODE"
             ],
-            "compilerPath": "E:\\MinGW\\MinGW\\bin\\g++"
+            "compilerPath": "E://MinGW//bin//gcc.exe"
         }
     ],
     "version": 4
