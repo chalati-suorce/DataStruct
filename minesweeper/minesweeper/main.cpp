@@ -5,7 +5,7 @@
 using namespace sf;
 
 int main() {
-    RenderWindow win(VideoMode(816, 576), L"扫雷" );
+    RenderWindow win(VideoMode(WIN_W, WIN_H), L"扫雷" );
     Texture t;
     t.loadFromFile("mine.png");
     Sprite s(t);
