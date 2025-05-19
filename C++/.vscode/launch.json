@@ -1,4 +1,5 @@
 {
+    "version": "2.0.0",
     "configurations": [
         {
             "name": "C/C++: gcc.exe 构建和调试活动文件",
@@ -9,7 +10,7 @@
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
-            "externalConsole": false,
+            "externalConsole": true,  // 使用外部控制台
             "MIMode": "gdb",
             "miDebuggerPath": "E:\\MinGW\\bin\\gdb.exe",
             "setupCommands": [
@@ -26,6 +27,5 @@
             ],
             "preLaunchTask": "C/C++: gcc.exe 生成活动文件"
         }
-    ],
-    "version": "2.0.0"
+    ]
 }
