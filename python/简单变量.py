@@ -1,6 +1,0 @@
-num=input("输入一个整数：")
-float=input("输入一个小数：")
-char=input("请输入一个字符：")
-print("",num)
-print("",float)
-print("",char)
