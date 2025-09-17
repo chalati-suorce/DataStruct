@@ -1,3 +1,6 @@
+'''
+题目：根据三角形三条边的长度判断能否可以构成一个三角形。
+'''
 def func(a,b,c):
     if a+b>c and a+c>b and b+c>a:
         return f"{a},{b},{c}能构成三角形"
