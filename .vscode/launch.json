@@ -1,26 +1,46 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "C/C++ 调试程序",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "${fileDirname}",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "gdb",
-            "miDebuggerPath": "D:\\MSYS\\ucrt64\\bin\\gdb.exe",
-            "setupCommands": [
-                {
-                    "description": "为 gdb 启用整齐打印",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                }
-            ],
-            "preLaunchTask": "C/C++: gcc.exe 生成活动文件"
-        }
-    ]
-}
+        "version": "0.2.0",
+        "configurations": [
+            {
+                "name": "gdb 启动",
+                "type": "cppdbg",
+                "request": "launch",
+                // 程序路径：当前文件目录下的同名可执行文件
+                "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                // 调试时传递给程序的参数，空数组表示无参数
+                "args": [],
+                // 是否在程序入口处自动暂停
+                "stopAtEntry": false,
+                // 调试工作目录：当前文件所在目录
+                "cwd": "${fileDirname}",
+                "environment": [],
+                // 是否使用外部控制台（false表示使用VS Code集成终端）
+                "externalConsole": false,
+                "MIMode": "gdb",
+                // 调试前执行的任务（需与tasks.json中的label一致）
+                "preLaunchTask": "C/C++: g++ 生成活动文件",
+                // GDB调试器路径（使用你的MSYS2 gdb路径）
+                "miDebuggerPath": "D:/MSYS/ucrt64/bin/gdb.exe",
+                "setupCommands": [
+                    {
+                        "description": "为gdb启用整齐打印",
+                        "text": "-enable-pretty-printing",
+                        "ignoreFailures": true
+                    },
+                    {
+                        "description": "将反汇编风格设置为Intel",
+                        "text": "-gdb-set disassembly-flavor intel",
+                        "ignoreFailures": true
+                    }
+                ],
+                // 调试日志设置
+                "logging": {
+                    "moduleLoad": false,
+                    "trace": false
+                },
+                // 允许在调试时修改代码（热重载）
+                "allowModifyVariables": true
+            }
+        ]
+    }
+
