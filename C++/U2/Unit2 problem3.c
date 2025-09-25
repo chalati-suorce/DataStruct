@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <windows.h>
 
 #define MAX_BOOKS 100  // 顺序表最大容量
 #define MAX_STR_LEN 50 // 字符串最大长度
@@ -158,6 +159,7 @@ void ShowAllBooks(BookList *list) {
 }
 
 int main() {
+    SetConsoleOutputCP(65001);  // 设置控制台输出编码为 UTF-8
     BookList list;
     InitBookList(&list);
     ReadFromFile(&list, "book.txt"); // 从文件读取初始数据
