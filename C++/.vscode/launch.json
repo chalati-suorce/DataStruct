@@ -12,7 +12,7 @@
             "environment": [],
             "externalConsole": true,  // 使用外部控制台
             "MIMode": "gdb",
-            "miDebuggerPath": "E:\\MinGW\\bin\\gdb.exe",
+            "miDebuggerPath": "E:\\MSYS\\mingw64\\bin\\gdb.exe",
             "setupCommands": [
                 {
                     "description": "为 gdb 启用整齐打印",

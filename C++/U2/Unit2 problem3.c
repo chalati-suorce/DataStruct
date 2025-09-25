@@ -181,7 +181,7 @@ int main() {
                 index = FindBook(&list, key, flag == 1);
                 if (index != -1) {
                     printf("找到图书，位置为 %d\n", index + 1);
-                    PrintOneBook(&list->data[index]);
+                    PrintOneBook(&list.data[index]);
                 } else {
                     printf("未找到该图书\n");
                 }
