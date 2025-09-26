@@ -1,6 +1,4 @@
 #include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
 
 #define MAX 100
 
@@ -152,11 +150,9 @@ void loadFromFile(StudentList *list, const char *filename) {
 
 // «Â∆¡
 void clearScreen() {
-#ifdef _WIN32
-    system("cls");
-#else
-    system("clear");
-#endif
+    for (int i = 0; i < 50; i++) {
+        printf("\n");
+    }
 }
 
 void modifyID(StudentList *list) {
