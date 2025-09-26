@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstdio>
+#include <cstring> 
 using namespace std;
 
 #define MAX 100
