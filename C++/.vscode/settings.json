@@ -27,5 +27,11 @@
                 "LANG": "en_US.UTF-8"
             }
         }
+    },
+    "files.associations": {
+        "ios": "cpp",
+        "xstring": "cpp",
+        "vector": "cpp",
+        "iomanip": "cpp"
     }
 }
