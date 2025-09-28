@@ -8,11 +8,13 @@ typedef struct {
     char name[20];
     char gender[20];
     char className[20];
-    char phonenumber[12];
+    char phonenumber[11];
 } Student;
 
+typedef Student elemtype;
+
 typedef struct {
-    Student students[MAX];
+    elemtype students[MAX];
     int length;
 } StudentList;
 
