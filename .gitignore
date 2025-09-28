@@ -537,4 +537,11 @@ C++/构造函数.exe
 C++/初始化列表.exe
 C++/output/初始化列表.exe
 .vscode/launch.json
+<<<<<<< HEAD
 .vscode/tasks.json
+=======
+.vscode/launch.json
+.vscode/tasks.json
+.gitignore
+C++/U2/output/StudentInformation.exe
+>>>>>>> 1394189b6a54531da0feb72ba1f6c138c54642de
