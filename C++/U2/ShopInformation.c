@@ -10,7 +10,7 @@ typedef struct {
     int quantity;
 } ShopItem;
 
-// ÓÃelemtypeÍ³Ò»ÉÌÆ·ÀàĞÍ
+// ä½¿ç”¨elemtypeç»Ÿä¸€å•†å“ç±»å‹
 typedef ShopItem elemtype;
 
 typedef struct {
@@ -18,73 +18,73 @@ typedef struct {
     int length;
 } ShopList;
 
-// ³õÊ¼»¯
+// åˆå§‹åŒ–
 void initShopList(ShopList *list) {
     list->length = 0;
-    printf("ÉÌÆ·ÁĞ±í³õÊ¼»¯Íê³É£¡\n");
+    printf("å•†å“åˆ—è¡¨åˆå§‹åŒ–å®Œæˆï¼\n");
 }
 
-// Ìí¼ÓÉÌÆ·
+// æ·»åŠ å•†å“
 void addShopItem(ShopList *list) {
     if (list->length >= MAX) {
-        printf("ÉÌÆ·ÊıÁ¿ÒÑ´ïÉÏÏŞ£¡\n");
+        printf("å•†å“æ•°é‡å·²è¾¾ä¸Šé™ï¼\n");
         return;
     }
     elemtype item;
     item.id = list->length + 1;
-    printf("ÇëÊäÈëÉÌÆ·Ãû³Æ: ");
-    scanf("%s", item.name);
-    printf("ÇëÊäÈëÉÌÆ·¼Û¸ñ: ");
-    scanf("%f", &item.price);
-    printf("ÇëÊäÈëÉÌÆ·¿â´æÊıÁ¿: ");
-    scanf("%d", &item.quantity);
+    printf("è¯·è¾“å…¥å•†å“åç§°: ");
+    scanf_s("%s", item.name, sizeof(item.name));
+    printf("è¯·è¾“å…¥å•†å“ä»·æ ¼: ");
+    scanf_s("%f", &item.price);
+    printf("è¯·è¾“å…¥å•†å“æ•°é‡: ");
+    scanf_s("%d", &item.quantity);
     list->items[list->length++] = item;
-    printf("Ìí¼Ó³É¹¦£¡\n");
+    printf("æ·»åŠ æˆåŠŸï¼\n");
 }
 
-// ÏÔÊ¾ËùÓĞÉÌÆ·
+// æ˜¾ç¤ºæ‰€æœ‰å•†å“
 void showAllShopItems(ShopList *list) {
-    printf("%-4s %-20s %-10s %-8s\n", "±àºÅ", "Ãû³Æ", "¼Û¸ñ", "¿â´æ");
+    printf("%-4s %-20s %-10s %-8s\n", "ç¼–å·", "åç§°", "ä»·æ ¼", "æ•°é‡");
     for (int i = 0; i < list->length; i++) {
         elemtype item = list->items[i];
         printf("%-4d %-20s %-10.2f %-8d\n", item.id, item.name, item.price, item.quantity);
     }
 }
 
-// °´Ãû³Æ²éÕÒÉÌÆ·
+// æŒ‰åç§°æŸ¥æ‰¾å•†å“
 void findShopItem(ShopList *list) {
     char name[32];
-    printf("ÇëÊäÈëÒª²éÕÒµÄÉÌÆ·Ãû³Æ: ");
-    scanf("%s", name);
+    printf("è¯·è¾“å…¥è¦æŸ¥æ‰¾çš„å•†å“åç§°: ");
+    scanf_s("%s", name, sizeof(name));
     for (int i = 0; i < list->length; i++) {
         if (strcmp(list->items[i].name, name) == 0) {
             elemtype item = list->items[i];
-            printf("ÕÒµ½ÉÌÆ·£º±àºÅ%d Ãû³Æ%s ¼Û¸ñ%.2f ¿â´æ%d\n", item.id, item.name, item.price, item.quantity);
+            printf("æ‰¾åˆ°å•†å“ï¼šç¼–å·%d åç§°%s ä»·æ ¼%.2f æ•°é‡%d\n", item.id, item.name, item.price, item.quantity);
             return;
         }
     }
-    printf("Î´ÕÒµ½¸ÃÉÌÆ·£¡\n");
+    printf("æœªæ‰¾åˆ°è¯¥å•†å“ï¼\n");
 }
 
-// É¾³ıÉÌÆ·
+// åˆ é™¤å•†å“
 void deleteShopItem(ShopList *list) {
     int id;
-    printf("ÇëÊäÈëÒªÉ¾³ıµÄÉÌÆ·±àºÅ: ");
-    scanf("%d", &id);
+    printf("è¯·è¾“å…¥è¦åˆ é™¤çš„å•†å“ç¼–å·: ");
+    scanf_s("%d", &id);
     int found = 0;
     for (int i = 0; i < list->length; i++) {
         if (list->items[i].id == id) {
             found = 1;
             for (int j = i; j < list->length - 1; j++) {
                 list->items[j] = list->items[j + 1];
-                list->items[j].id = j + 1; // ÖØĞÂ±àºÅ
+                list->items[j].id = j + 1; // æ›´æ–°ç¼–å·
             }
             list->length--;
-            printf("É¾³ı³É¹¦£¡\n");
+            printf("åˆ é™¤æˆåŠŸï¼\n");
             break;
         }
     }
-    if (!found) printf("Î´ÕÒµ½¸ÃÉÌÆ·£¡\n");
+    if (!found) printf("æœªæ‰¾åˆ°è¯¥å•†å“ï¼\n");
 }
 
 int main() {
@@ -92,21 +92,23 @@ int main() {
     int choice;
     initShopList(&list);
     while (1) {
-        printf("\nÉÌÆ·ĞÅÏ¢¹ÜÀíÏµÍ³\n");
-        printf("1. Ìí¼ÓÉÌÆ·\n");
-        printf("2. ÏÔÊ¾ËùÓĞÉÌÆ·\n");
-        printf("3. ²éÕÒÉÌÆ·\n");
-        printf("4. É¾³ıÉÌÆ·\n");
-        printf("0. ÍË³ö\n");
-        printf("ÇëÑ¡Ôñ: ");
-        scanf("%d", &choice);
+        printf("\nå•†å“ä¿¡æ¯ç®¡ç†ç³»ç»Ÿ\n");
+        printf("1. åˆå§‹åŒ–\n");
+        printf("2. æ·»åŠ å•†å“\n");
+        printf("3. æ˜¾ç¤ºæ‰€æœ‰å•†å“\n");
+        printf("4. æŸ¥æ‰¾å•†å“\n");
+        printf("5. åˆ é™¤å•†å“\n");
+        printf("0. é€€å‡º\n");
+        printf("è¯·é€‰æ‹©: ");
+        scanf_s("%d", &choice);
         switch (choice) {
-            case 1: addShopItem(&list); break;
-            case 2: showAllShopItems(&list); break;
-            case 3: findShopItem(&list); break;
-            case 4: deleteShopItem(&list); break;
+            case 1: initShopList(&list); break;
+            case 2: addShopItem(&list); break;
+            case 3: showAllShopItems(&list); break;
+            case 4: findShopItem(&list); break;
+            case 5: deleteShopItem(&list); break;
             case 0: return 0;
-            default: printf("ÎŞĞ§Ñ¡Ôñ£¡\n");
+            default: printf("æ— æ•ˆé€‰æ‹©ï¼\n");
         }
     }
     return 0;

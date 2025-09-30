@@ -32,15 +32,15 @@ void addStudent(StudentList *list) {
     }
     Student s;
     printf("请输入学号: ");
-    scanf("%d", &s.studentID);
+    scanf_s("%d", &s.studentID);
     printf("请输入姓名: ");
-    scanf("%s", s.name);
+    scanf_s("%s", s.name, sizeof(s.name));
     printf("请输入性别: ");
-    scanf("%s", s.gender);
+    scanf_s("%s", s.gender, sizeof(s.gender));
     printf("请输入班级: ");
-    scanf("%s", s.className);
+    scanf_s("%s", s.className, sizeof(s.className));
     printf("请输入手机号: ");
-    scanf("%s", s.phonenumber);
+    scanf_s("%s", s.phonenumber, sizeof(s.phonenumber));
     s.id = list->length + 1;
     list->students[list->length++] = s;
     printf("添加成功！\n");
@@ -59,7 +59,7 @@ void showAll(StudentList *list) {
 void findStudent(StudentList *list) {
     int sid;
     printf("请输入要查找的学号: ");
-    scanf("%d", &sid);
+    scanf_s("%d", &sid);
     for (int i = 0; i < list->length; i++) {
         if (list->students[i].studentID == sid) {
             Student s = list->students[i];
@@ -74,7 +74,7 @@ void findStudent(StudentList *list) {
 void deleteStudent(StudentList *list) {
     int sid, found = 0;
     printf("请输入要删除的学号: ");
-    scanf("%d", &sid);
+    scanf_s("%d", &sid);
     for (int i = 0; i < list->length; i++) {
         if (list->students[i].studentID == sid) {
             for (int j = i; j < list->length - 1; j++) {
@@ -95,17 +95,17 @@ void deleteStudent(StudentList *list) {
 void modifyStudent(StudentList *list) {
     int sid;
     printf("请输入要修改的学号: ");
-    scanf("%d", &sid);
+    scanf_s("%d", &sid);
     for (int i = 0; i < list->length; i++) {
         if (list->students[i].studentID == sid) {
             printf("请输入新姓名: ");
-            scanf("%s", list->students[i].name);
+            scanf_s("%s", list->students[i].name, sizeof(list->students[i].name));
             printf("请输入新性别: ");
-            scanf("%s", list->students[i].gender);
+            scanf_s("%s", list->students[i].gender, sizeof(list->students[i].gender));
             printf("请输入新班级: ");
-            scanf("%s", list->students[i].className);
+            scanf_s("%s", list->students[i].className, sizeof(list->students[i].className));
             printf("请输入新手机号: ");
-            scanf("%s", list->students[i].phonenumber);
+            scanf_s("%s", list->students[i].phonenumber, sizeof(list->students[i].phonenumber));
             printf("修改成功！\n");
             return;
         }
@@ -160,12 +160,12 @@ void clearScreen() {
 void modifyID(StudentList *list) {
     int oldID, newID, found = 0;
     printf("请输入要修改编号的学号: ");
-    scanf("%d", &oldID);
+    scanf_s("%d", &oldID);
     for (int i = 0; i < list->length; i++) {
         if (list->students[i].studentID == oldID) {
             printf("当前编号为: %d\n", list->students[i].id);
             printf("请输入新编号: ");
-            scanf("%d", &newID);
+            scanf_s("%d", &newID);
             list->students[i].id = newID;
             printf("编号修改成功！\n");
             found = 1;
@@ -198,7 +198,7 @@ int main() {
         printf("0. 清屏\n");
         printf("886. 退出\n");
         printf("请选择: ");
-        scanf("%d", &choice);
+        scanf_s("%d", &choice);
         switch (choice) {
             case 1: init(&list); break;
             case 2: showAll(&list); break;
