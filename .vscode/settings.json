@@ -17,5 +17,11 @@
     },
     "[cpp]": {
         "files.encoding": "utf8"
-    }
+    },
+    "code-runner.executorMap": {
+        "c": "cd $dir && gcc \"$fileName\" -o \"output/$fileNameWithoutExt.exe\" && echo Compiled to output/$fileNameWithoutExt.exe",
+        "cpp": "cd $dir && g++ \"$fileName\" -o \"output/$fileNameWithoutExt.exe\" && echo Compiled to output/$fileNameWithoutExt.exe"
+    },
+    "code-runner.runInTerminal": true,
+    "code-runner.saveAllFilesBeforeRun": true
 }
