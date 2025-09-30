@@ -1,21 +1,21 @@
-#include <stdio.h>
+﻿#include <stdio.h>
 #include <stdlib.h>
 
-// 定义顺序表的结构
+// 瀹氫箟椤哄簭琛ㄧ殑缁撴瀯
 typedef struct {
     int* elements;
     size_t size;
     size_t capacity;
 } SequentialList;
 
-// 顺序表的初始化
+// 椤哄簭琛ㄧ殑鍒濆鍖?
 void SequentialListInit(SequentialList* list, int capacity) {
     list->elements = (int*)malloc(sizeof(int) * capacity);
     list->size = 0;
     list->capacity = capacity;
 }
 
-// 顺序表的销毁
+// 椤哄簭琛ㄧ殑閿€姣?
 void SequentialListDestroy(SequentialList* list) {
     if (list->elements != NULL) {
         free(list->elements);
@@ -23,12 +23,12 @@ void SequentialListDestroy(SequentialList* list) {
     }
 }
 
-// 顺序表的元素个数
+// 椤哄簭琛ㄧ殑鍏冪礌涓暟
 size_t SequentialListSize(const SequentialList* list) {
     return list->size;
 }
 
-// 顺序表的元素插入
+// 椤哄簭琛ㄧ殑鍏冪礌鎻掑叆
 void SequentialListInsert(SequentialList* list, int index, int element) {
     if (index < 0 || index > list->size) {
         printf("Invalid index\n");
@@ -52,7 +52,7 @@ void SequentialListInsert(SequentialList* list, int index, int element) {
     list->size++;
 }
 
-// 顺序表的元素删除
+// 椤哄簭琛ㄧ殑鍏冪礌鍒犻櫎
 void SequentialListDelete(SequentialList* list, int index) {
     if (index < 0 || index >= list->size) {
         printf("Invalid index\n");
@@ -65,7 +65,7 @@ void SequentialListDelete(SequentialList* list, int index) {
     list->size--;
 }
 
-// 顺序表的元素查找
+// 椤哄簭琛ㄧ殑鍏冪礌鏌ユ壘
 int SequentialListFind(const SequentialList* list, int element) {
     for (size_t i = 0; i < list->size; i++) {
         if (list->elements[i] == element) {
@@ -75,7 +75,7 @@ int SequentialListFind(const SequentialList* list, int element) {
     return -1;
 }
 
-// 顺序表的元素索引
+// 椤哄簭琛ㄧ殑鍏冪礌绱㈠紩
 int SequentialListIndex(const SequentialList* list, int index) {
     if (index < 0 || index >= list->size) {
         printf("Invalid index\n");
@@ -84,7 +84,7 @@ int SequentialListIndex(const SequentialList* list, int index) {
     return list->elements[index];
 }
 
-// 顺序表的元素修改
+// 椤哄簭琛ㄧ殑鍏冪礌淇敼
 void SequentialListSet(SequentialList* list, int index, int element) {
     if (index < 0 || index >= list->size) {
         printf("Invalid index\n");
@@ -93,7 +93,7 @@ void SequentialListSet(SequentialList* list, int index, int element) {
     list->elements[index] = element;
 }
 
-// 顺序表的完整源码
+// 椤哄簭琛ㄧ殑瀹屾暣婧愮爜
 int main() {
     SequentialList list;
     SequentialListInit(&list, 1);

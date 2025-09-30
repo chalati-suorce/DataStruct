@@ -1,21 +1,21 @@
-#include <stdio.h>
+﻿#include <stdio.h>
 #include <stdlib.h>
 
 #define MAXSIZE 100
 
-// 多项式项的结构定义
+// 澶氶」寮忛」鐨勭粨鏋勫畾涔?
 typedef struct {
-    float coef;    // 系数
-    int expn;      // 指数
+    float coef;    // 绯绘暟
+    int expn;      // 鎸囨暟
 } PolyTerm;
 
-// 多项式的顺序表示
+// 澶氶」寮忕殑椤哄簭琛ㄧず
 typedef struct {
-    PolyTerm *data;   // 存储空间基址
-    int length;       // 多项式项数
+    PolyTerm *data;   // 瀛樺偍绌洪棿鍩哄潃
+    int length;       // 澶氶」寮忛」鏁?
 } SqPoly;
 
-// 初始化多项式
+// 鍒濆鍖栧椤瑰紡
 SqPoly* InitPoly() {
     SqPoly* P = (SqPoly*)malloc(sizeof(SqPoly));
     P->data = (PolyTerm*)malloc(MAXSIZE * sizeof(PolyTerm));
@@ -23,23 +23,23 @@ SqPoly* InitPoly() {
     return P;
 }
 
-// 输入多项式
+// 杈撳叆澶氶」寮?
 void InputPoly(SqPoly* P) {
     int n;
-    printf("请输入多项式的项数: ");
+    printf("璇疯緭鍏ュ椤瑰紡鐨勯」鏁? ");
     scanf("%d", &n);
     
-    printf("请按指数升序输入每一项的系数和指数\n");
+    printf("璇锋寜鎸囨暟鍗囧簭杈撳叆姣忎竴椤圭殑绯绘暟鍜屾寚鏁癨n");
     for(int i = 0; i < n; i++) {
-        printf("第%d项 - 系数: ", i+1);
+        printf("绗?d椤?- 绯绘暟: ", i+1);
         scanf("%f", &P->data[i].coef);
-        printf("第%d项 - 指数: ", i+1);
+        printf("绗?d椤?- 鎸囨暟: ", i+1);
         scanf("%d", &P->data[i].expn);
     }
     P->length = n;
 }
 
-// 打印多项式
+// 鎵撳嵃澶氶」寮?
 void PrintPoly(SqPoly* P) {
     if(P->length == 0) {
         printf("0\n");
@@ -59,7 +59,7 @@ void PrintPoly(SqPoly* P) {
     printf("\n");
 }
 
-// 多项式相加
+// 澶氶」寮忕浉鍔?
 SqPoly* AddPoly(SqPoly* P1, SqPoly* P2) {
     SqPoly* P = InitPoly();
     int i = 0, j = 0, k = 0;
@@ -88,10 +88,10 @@ SqPoly* AddPoly(SqPoly* P1, SqPoly* P2) {
     return P;
 }
 
-// 多项式相减
+// 澶氶」寮忕浉鍑?
 SqPoly* SubPoly(SqPoly* P1, SqPoly* P2) {
     SqPoly* P = InitPoly();
-    // 将P2的系数取反，然后调用加法
+    // 灏哖2鐨勭郴鏁板彇鍙嶏紝鐒跺悗璋冪敤鍔犳硶
     SqPoly* temp = InitPoly();
     temp->length = P2->length;
     for(int i = 0; i < P2->length; i++) {
@@ -104,16 +104,16 @@ SqPoly* SubPoly(SqPoly* P1, SqPoly* P2) {
     return P;
 }
 
-// 多项式相乘
+// 澶氶」寮忕浉涔?
 SqPoly* MulPoly(SqPoly* P1, SqPoly* P2) {
     SqPoly* P = InitPoly();
     if(P1->length == 0 || P2->length == 0) return P;
     
-    // 用于临时存储乘积项
+    // 鐢ㄤ簬涓存椂瀛樺偍涔樼Н椤?
     PolyTerm temp[MAXSIZE];
     int k = 0;
     
-    // 计算所有项的乘积
+    // 璁＄畻鎵€鏈夐」鐨勪箻绉?
     for(int i = 0; i < P1->length; i++) {
         for(int j = 0; j < P2->length; j++) {
             temp[k].coef = P1->data[i].coef * P2->data[j].coef;
@@ -122,7 +122,7 @@ SqPoly* MulPoly(SqPoly* P1, SqPoly* P2) {
         }
     }
     
-    // 合并同类项
+    // 鍚堝苟鍚岀被椤?
     for(int i = 0; i < k; i++) {
         if(temp[i].coef != 0) {
             float sum = temp[i].coef;
@@ -140,7 +140,7 @@ SqPoly* MulPoly(SqPoly* P1, SqPoly* P2) {
         }
     }
     
-    // 按指数升序排序
+    // 鎸夋寚鏁板崌搴忔帓搴?
     for(int i = 0; i < P->length - 1; i++) {
         for(int j = 0; j < P->length - 1 - i; j++) {
             if(P->data[j].expn > P->data[j+1].expn) {
@@ -158,29 +158,29 @@ int main() {
     SqPoly *P1 = InitPoly();
     SqPoly *P2 = InitPoly();
     
-    printf("输入第一个多项式：\n");
+    printf("杈撳叆绗竴涓椤瑰紡锛歕n");
     InputPoly(P1);
-    printf("输入第二个多项式：\n");
+    printf("杈撳叆绗簩涓椤瑰紡锛歕n");
     InputPoly(P2);
     
-    printf("\n第一个多项式：");
+    printf("\n绗竴涓椤瑰紡锛?);
     PrintPoly(P1);
-    printf("第二个多项式：");
+    printf("绗簩涓椤瑰紡锛?);
     PrintPoly(P2);
     
     SqPoly *sum = AddPoly(P1, P2);
-    printf("\n相加结果：");
+    printf("\n鐩稿姞缁撴灉锛?);
     PrintPoly(sum);
     
     SqPoly *diff = SubPoly(P1, P2);
-    printf("相减结果：");
+    printf("鐩稿噺缁撴灉锛?);
     PrintPoly(diff);
     
     SqPoly *prod = MulPoly(P1, P2);
-    printf("相乘结果：");
+    printf("鐩镐箻缁撴灉锛?);
     PrintPoly(prod);
     
-    // 释放内存
+    // 閲婃斁鍐呭瓨
     free(P1->data); free(P1);
     free(P2->data); free(P2);
     free(sum->data); free(sum);

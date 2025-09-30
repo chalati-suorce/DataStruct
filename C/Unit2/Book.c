@@ -1,4 +1,4 @@
-#include <stdio.h>
+ï»¿#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -17,12 +17,12 @@ typedef struct {
     int length;
 } BookList;
 
-// ³õÊ¼»¯Ë³Ğò±í
+// åˆå§‹åŒ–é¡ºåºè¡¨
 void InitBookList(BookList *list) {
     list->length = 0;
 }
 
-// ÎÄ¼ş¶ÁÈ¡
+// æ–‡ä»¶è¯»å–
 int ReadFromFile(BookList *list, const char *filename) {
     FILE *fp = fopen(filename, "r");
     if (!fp) return 0;
@@ -37,7 +37,7 @@ int ReadFromFile(BookList *list, const char *filename) {
     return 1;
 }
 
-// ÎÄ¼ş±£´æ
+// æ–‡ä»¶ä¿å­˜
 int SaveToFile(BookList *list, const char *filename) {
     FILE *fp = fopen(filename, "w");
     if (!fp) return 0;
@@ -50,7 +50,7 @@ int SaveToFile(BookList *list, const char *filename) {
     return 1;
 }
 
-// ²éÕÒ
+// æŸ¥æ‰¾
 int FindBook(BookList *list, const char *key, int isbnFlag) {
     for (int i = 0; i < list->length; i++) {
         if (isbnFlag && strcmp(list->data[i].isbn, key) == 0)
@@ -61,14 +61,14 @@ int FindBook(BookList *list, const char *key, int isbnFlag) {
     return -1;
 }
 
-// ²åÈë
+// æ’å…¥
 int InsertBook(BookList *list, Book *newBook) {
     if (list->length >= MAX_BOOKS) return 0;
     list->data[list->length++] = *newBook;
     return 1;
 }
 
-// É¾³ı
+// åˆ é™¤
 int DeleteBook(BookList *list, int index) {
     if (index < 0 || index >= list->length) return 0;
     for (int i = index; i < list->length - 1; i++)
@@ -77,7 +77,7 @@ int DeleteBook(BookList *list, int index) {
     return 1;
 }
 
-// ĞŞ¸Ä¼Û¸ñ
+// ä¿®æ”¹ä»·æ ¼
 int ModifyPrice(BookList *list, const char *isbn, float newPrice) {
     int idx = FindBook(list, isbn, 1);
     if (idx == -1) return 0;
@@ -85,7 +85,7 @@ int ModifyPrice(BookList *list, const char *isbn, float newPrice) {
     return 1;
 }
 
-// ÅÅĞò
+// æ’åº
 void SortByPrice(BookList *list) {
     for (int i = 0; i < list->length - 1; i++) {
         int minIdx = i;
@@ -98,26 +98,26 @@ void SortByPrice(BookList *list) {
     }
 }
 
-// ÏÔÊ¾ËùÓĞ
+// æ˜¾ç¤ºæ‰€æœ‰
 void ShowAllBooks(BookList *list) {
-    printf("\n===== ËùÓĞÍ¼ÊéĞÅÏ¢ =====\n");
+    printf("\n===== æ‰€æœ‰å›¾ä¹¦ä¿¡æ¯ =====\n");
     for (int i = 0; i < list->length; i++)
-        printf("[%d] ISBN: %s, ÊéÃû: %s, ¼Û¸ñ: %.2f\n",
+        printf("[%d] ISBN: %s, ä¹¦å: %s, ä»·æ ¼: %.2f\n",
                i + 1, list->data[i].isbn, list->data[i].name, list->data[i].price);
 }
 
-// ²Ëµ¥
+// èœå•
 void PrintMenu() {
-    printf("\n===== Í¼ÊéĞÅÏ¢¹ÜÀíÏµÍ³ =====\n");
-    printf("1. ²éÕÒÍ¼Êé£¨ISBN/ÊéÃû£©\n");
-    printf("2. ²åÈëÍ¼Êé\n");
-    printf("3. É¾³ıÍ¼Êé£¨°´Î»ÖÃ£©\n");
-    printf("4. ĞŞ¸ÄÍ¼Êé¼Û¸ñ£¨°´ISBN£©\n");
-    printf("5. °´¼Û¸ñÅÅĞò\n");
-    printf("6. Í³¼ÆÍ¼ÊéÊıÁ¿\n");
-    printf("7. ÏÔÊ¾ËùÓĞÍ¼Êé\n");
-    printf("0. ÍË³öÏµÍ³\n");
-    printf("ÇëÊäÈëÑ¡Ôñ£º");
+    printf("\n===== å›¾ä¹¦ä¿¡æ¯ç®¡ç†ç³»ç»Ÿ =====\n");
+    printf("1. æŸ¥æ‰¾å›¾ä¹¦ï¼ˆISBN/ä¹¦åï¼‰\n");
+    printf("2. æ’å…¥å›¾ä¹¦\n");
+    printf("3. åˆ é™¤å›¾ä¹¦ï¼ˆæŒ‰ä½ç½®ï¼‰\n");
+    printf("4. ä¿®æ”¹å›¾ä¹¦ä»·æ ¼ï¼ˆæŒ‰ISBNï¼‰\n");
+    printf("5. æŒ‰ä»·æ ¼æ’åº\n");
+    printf("6. ç»Ÿè®¡å›¾ä¹¦æ•°é‡\n");
+    printf("7. æ˜¾ç¤ºæ‰€æœ‰å›¾ä¹¦\n");
+    printf("0. é€€å‡ºç³»ç»Ÿ\n");
+    printf("è¯·è¾“å…¥é€‰æ‹©ï¼š");
 }
 
 int main() {
@@ -135,60 +135,60 @@ int main() {
         scanf("%d", &choice);
         switch (choice) {
             case 1:
-                printf("ÇëÑ¡Ôñ²éÕÒ·½Ê½£¨1: ISBN, 2: ÊéÃû£©£º");
+                printf("è¯·é€‰æ‹©æŸ¥æ‰¾æ–¹å¼ï¼ˆ1: ISBN, 2: ä¹¦åï¼‰ï¼š");
                 scanf("%d", &flag);
-                printf("ÇëÊäÈë¹Ø¼ü´Ê£º");
+                printf("è¯·è¾“å…¥å…³é”®è¯ï¼š");
                 scanf("%s", key);
                 index = FindBook(&list, key, flag == 1);
                 if (index != -1) {
-                    printf("ÕÒµ½Í¼Êé£¬Î»ÖÃÎª %d\n", index + 1);
-                    printf("ISBN: %s, ÊéÃû: %s, ¼Û¸ñ: %.2f\n",
+                    printf("æ‰¾åˆ°å›¾ä¹¦ï¼Œä½ç½®ä¸º %d\n", index + 1);
+                    printf("ISBN: %s, ä¹¦å: %s, ä»·æ ¼: %.2f\n",
                            list.data[index].isbn, list.data[index].name, list.data[index].price);
                 } else {
-                    printf("Î´ÕÒµ½¸ÃÍ¼Êé\n");
+                    printf("æœªæ‰¾åˆ°è¯¥å›¾ä¹¦\n");
                 }
                 break;
             case 2:
-                printf("ÇëÊäÈëĞÂÍ¼ÊéµÄISBN¡¢ÊéÃû¡¢¼Û¸ñ£º");
+                printf("è¯·è¾“å…¥æ–°å›¾ä¹¦çš„ISBNã€ä¹¦åã€ä»·æ ¼ï¼š");
                 scanf("%s %s %f", newBook.isbn, newBook.name, &newBook.price);
                 if (InsertBook(&list, &newBook))
-                    printf("²åÈëÍ¼Êé³É¹¦\n");
+                    printf("æ’å…¥å›¾ä¹¦æˆåŠŸ\n");
                 else
-                    printf("²åÈëÊ§°Ü£¬ÒÑ´ïÉÏÏŞ\n");
+                    printf("æ’å…¥å¤±è´¥ï¼Œå·²è¾¾ä¸Šé™\n");
                 break;
             case 3:
                 ShowAllBooks(&list);
-                printf("ÇëÊäÈëÒªÉ¾³ıµÄÍ¼ÊéÎ»ÖÃ£º");
+                printf("è¯·è¾“å…¥è¦åˆ é™¤çš„å›¾ä¹¦ä½ç½®ï¼š");
                 scanf("%d", &index);
                 if (DeleteBook(&list, index - 1))
-                    printf("É¾³ı³É¹¦\n");
+                    printf("åˆ é™¤æˆåŠŸ\n");
                 else
-                    printf("É¾³ıÊ§°Ü\n");
+                    printf("åˆ é™¤å¤±è´¥\n");
                 break;
             case 4:
-                printf("ÇëÊäÈëÍ¼ÊéISBNºÍĞÂ¼Û¸ñ£º");
+                printf("è¯·è¾“å…¥å›¾ä¹¦ISBNå’Œæ–°ä»·æ ¼ï¼š");
                 scanf("%s %f", key, &price);
                 if (ModifyPrice(&list, key, price))
-                    printf("ĞŞ¸Ä¼Û¸ñ³É¹¦\n");
+                    printf("ä¿®æ”¹ä»·æ ¼æˆåŠŸ\n");
                 else
-                    printf("Î´ÕÒµ½¸ÃISBN\n");
+                    printf("æœªæ‰¾åˆ°è¯¥ISBN\n");
                 break;
             case 5:
                 SortByPrice(&list);
-                printf("ÒÑ°´¼Û¸ñÅÅĞò\n");
+                printf("å·²æŒ‰ä»·æ ¼æ’åº\n");
                 break;
             case 6:
-                printf("µ±Ç°Í¼ÊéÊıÁ¿£º%d\n", list.length);
+                printf("å½“å‰å›¾ä¹¦æ•°é‡ï¼š%d\n", list.length);
                 break;
             case 7:
                 ShowAllBooks(&list);
                 break;
             case 0:
                 SaveToFile(&list, "book.txt");
-                printf("¸ĞĞ»Ê¹ÓÃ£¬ÔÙ¼û£¡\n");
+                printf("æ„Ÿè°¢ä½¿ç”¨ï¼Œå†è§ï¼\n");
                 return 0;
             default:
-                printf("ÊäÈëÎŞĞ§£¬ÇëÖØĞÂÑ¡Ôñ\n");
+                printf("è¾“å…¥æ— æ•ˆï¼Œè¯·é‡æ–°é€‰æ‹©\n");
         }
     }
     return 0;

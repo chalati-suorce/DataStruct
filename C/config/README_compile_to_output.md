@@ -11,21 +11,40 @@
 
 ### 2. 编译脚本
 
-#### Windows批处理文件 (compile_to_output.bat)
+#### 单个文件编译
+**Windows批处理文件 (compile_to_output.bat)**
 ```cmd
 # 编译单个文件
 compile_to_output.bat example.c
-
-# 编译多个文件
-for %f in (*.c) do compile_to_output.bat "%f"
 ```
 
-#### PowerShell脚本 (compile_to_output.ps1)
+**PowerShell脚本 (compile_to_output.ps1)**
 ```powershell
 # 编译单个文件
 .\compile_to_output.ps1 -SourceFile "example.c"
+```
 
-# 编译所有C文件
+#### 批量编译所有文件
+**Windows批处理文件 (compile_all_to_output.bat)**
+```cmd
+# 批量编译所有C文件
+compile_all_to_output.bat
+```
+
+**PowerShell脚本 (compile_all_to_output.ps1)**
+```powershell
+# 批量编译所有C文件
+.\compile_all_to_output.ps1
+```
+
+#### 手动编译多个文件
+```cmd
+# 编译当前目录所有C文件
+for %f in (*.c) do compile_to_output.bat "%f"
+```
+
+```powershell
+# 编译当前目录所有C文件
 Get-ChildItem *.c | ForEach-Object { .\compile_to_output.ps1 -SourceFile $_.Name }
 ```
 

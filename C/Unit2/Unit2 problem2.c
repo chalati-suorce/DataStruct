@@ -1,33 +1,33 @@
-#include <stdio.h>
+﻿#include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 
-#define MAX_TERMS 100  // 顺序表最大容量
+#define MAX_TERMS 100  // 椤哄簭琛ㄦ渶澶у閲?
 
-// 多项式项：系数 + 指数
+// 澶氶」寮忛」锛氱郴鏁?+ 鎸囨暟
 typedef struct {
-    double coef;  // 系数
-    int exp;      // 指数
+    double coef;  // 绯绘暟
+    int exp;      // 鎸囨暟
 } Term;
 
-// 稀疏多项式的顺序表结构
+// 绋€鐤忓椤瑰紡鐨勯『搴忚〃缁撴瀯
 typedef struct {
     Term data[MAX_TERMS];
-    int length;  // 实际项数
+    int length;  // 瀹為檯椤规暟
 } SparsePoly;
 
-// 初始化多项式
+// 鍒濆鍖栧椤瑰紡
 void InitPoly(SparsePoly *poly) {
     poly->length = 0;
 }
 
-// 插入项（保持指数递增）
+// 鎻掑叆椤癸紙淇濇寔鎸囨暟閫掑锛?
 int InsertTerm(SparsePoly *poly, double coef, int exp) {
     if (poly->length >= MAX_TERMS) {
-        printf("Error: 多项式项数超出最大容量！\n");
+        printf("Error: 澶氶」寮忛」鏁拌秴鍑烘渶澶у閲忥紒\n");
         return 0;
     }
-    // 找到插入位置（保证指数从小到大）
+    // 鎵惧埌鎻掑叆浣嶇疆锛堜繚璇佹寚鏁颁粠灏忓埌澶э級
     int i;
     for (i = poly->length - 1; i >= 0 && poly->data[i].exp > exp; i--) {
         poly->data[i + 1] = poly->data[i];
@@ -38,7 +38,7 @@ int InsertTerm(SparsePoly *poly, double coef, int exp) {
     return 1;
 }
 
-// 多项式加法：C = A + B
+// 澶氶」寮忓姞娉曪細C = A + B
 void AddPoly(SparsePoly *A, SparsePoly *B, SparsePoly *C) {
     InitPoly(C);
     int i = 0, j = 0;
@@ -58,26 +58,26 @@ void AddPoly(SparsePoly *A, SparsePoly *B, SparsePoly *C) {
             j++;
         }
     }
-    // 处理A剩余项
+    // 澶勭悊A鍓╀綑椤?
     while (i < A->length) {
         InsertTerm(C, A->data[i].coef, A->data[i].exp);
         i++;
     }
-    // 处理B剩余项
+    // 澶勭悊B鍓╀綑椤?
     while (j < B->length) {
         InsertTerm(C, B->data[j].coef, B->data[j].exp);
         j++;
     }
 }
 
-// 打印多项式
+// 鎵撳嵃澶氶」寮?
 void PrintPoly(SparsePoly *poly) {
     if (poly->length == 0) {
         printf("0\n");
         return;
     }
     for (int i = 0; i < poly->length; i++) {
-        // 处理系数的符号和显示
+        // 澶勭悊绯绘暟鐨勭鍙峰拰鏄剧ず
         if (i == 0) {
             if (poly->data[i].coef != 1 && poly->data[i].coef != -1) {
                 printf("%.1f", poly->data[i].coef);
@@ -92,7 +92,7 @@ void PrintPoly(SparsePoly *poly) {
                 printf("-");
             }
         }
-        // 处理指数的显示
+        // 澶勭悊鎸囨暟鐨勬樉绀?
         if (poly->data[i].exp == 0) {
             continue;
         } else if (poly->data[i].exp == 1) {
@@ -109,24 +109,24 @@ int main() {
     InitPoly(&poly1);
     InitPoly(&poly2);
     
-    // 构造多项式1: S(x) = 1 + 3x^10000 + 2x^20000
+    // 鏋勯€犲椤瑰紡1: S(x) = 1 + 3x^10000 + 2x^20000
     InsertTerm(&poly1, 1, 0);
     InsertTerm(&poly1, 3, 10000);
     InsertTerm(&poly1, 2, 20000);
     
-    // 构造多项式2: P(x) = 2x + 5x^10000 - 3x^30000
+    // 鏋勯€犲椤瑰紡2: P(x) = 2x + 5x^10000 - 3x^30000
     InsertTerm(&poly2, 2, 1);
     InsertTerm(&poly2, 5, 10000);
     InsertTerm(&poly2, -3, 30000);
     
-    printf("多项式1: ");
+    printf("澶氶」寮?: ");
     PrintPoly(&poly1);
-    printf("多项式2: ");
+    printf("澶氶」寮?: ");
     PrintPoly(&poly2);
     
-    // 多项式相加
+    // 澶氶」寮忕浉鍔?
     AddPoly(&poly1, &poly2, &polySum);
-    printf("多项式1 + 多项式2 = ");
+    printf("澶氶」寮? + 澶氶」寮? = ");
     PrintPoly(&polySum);
     
     return 0;

@@ -1,4 +1,4 @@
-#include <stdio.h>
+ï»¿#include <stdio.h>
 
 #define MAX 100
 
@@ -18,62 +18,62 @@ typedef struct {
     int length;
 } StudentList;
 
-// ³õÊ¼»¯Ñ§ÉúÁĞ±í
+// åˆå§‹åŒ–å­¦ç”Ÿåˆ—è¡¨
 void init(StudentList *list) {
     list->length = 0;
-    printf("³õÊ¼»¯Íê³É£¡\n");
+    printf("åˆå§‹åŒ–å®Œæˆï¼\n");
 }
 
-// Ìí¼ÓÑ§Éú
+// æ·»åŠ å­¦ç”Ÿ
 void addStudent(StudentList *list) {
     if (list->length >= MAX) {
-        printf("Ñ§ÉúÊıÁ¿ÒÑ´ïÉÏÏŞ£¡\n");
+        printf("å­¦ç”Ÿæ•°é‡å·²è¾¾ä¸Šé™ï¼\n");
         return;
     }
     Student s;
-    printf("ÇëÊäÈëÑ§ºÅ: ");
+    printf("è¯·è¾“å…¥å­¦å·: ");
     scanf_s("%d", &s.studentID);
-    printf("ÇëÊäÈëĞÕÃû: ");
+    printf("è¯·è¾“å…¥å§“å: ");
     scanf_s("%s", s.name, sizeof(s.name));
-    printf("ÇëÊäÈëĞÔ±ğ: ");
+    printf("è¯·è¾“å…¥æ€§åˆ«: ");
     scanf_s("%s", s.gender, sizeof(s.gender));
-    printf("ÇëÊäÈë°à¼¶: ");
+    printf("è¯·è¾“å…¥ç­çº§: ");
     scanf_s("%s", s.className, sizeof(s.className));
-    printf("ÇëÊäÈëÊÖ»úºÅ: ");
+    printf("è¯·è¾“å…¥æ‰‹æœºå·: ");
     scanf_s("%s", s.phonenumber, sizeof(s.phonenumber));
     s.id = list->length + 1;
     list->students[list->length++] = s;
-    printf("Ìí¼Ó³É¹¦£¡\n");
+    printf("æ·»åŠ æˆåŠŸï¼\n");
 }
 
-// ÏÔÊ¾ËùÓĞÑ§Éú
+// æ˜¾ç¤ºæ‰€æœ‰å­¦ç”Ÿ
 void showAll(StudentList *list) {
-    printf("%-6s %-10s %-10s %-8s %-10s %-12s\n", "±àºÅ", "Ñ§ºÅ", "ĞÕÃû", "ĞÔ±ğ", "°à¼¶", "ÊÖ»úºÅ");
+    printf("%-6s %-10s %-10s %-8s %-10s %-12s\n", "ç¼–å·", "å­¦å·", "å§“å", "æ€§åˆ«", "ç­çº§", "æ‰‹æœºå·");
     for (int i = 0; i < list->length; i++) {
         Student s = list->students[i];
         printf("%-6d %-10d %-10s %-8s %-10s %-12s\n", s.id, s.studentID, s.name, s.gender, s.className, s.phonenumber);
     }
 }
 
-// °´Ñ§ºÅ²éÕÒÑ§Éú
+// æŒ‰å­¦å·æŸ¥æ‰¾å­¦ç”Ÿ
 void findStudent(StudentList *list) {
     int sid;
-    printf("ÇëÊäÈëÒª²éÕÒµÄÑ§ºÅ: ");
+    printf("è¯·è¾“å…¥è¦æŸ¥æ‰¾çš„å­¦å·: ");
     scanf_s("%d", &sid);
     for (int i = 0; i < list->length; i++) {
         if (list->students[i].studentID == sid) {
             Student s = list->students[i];
-            printf("ÕÒµ½Ñ§Éú: %d\t%d\t%s\t%s\t%s\t%s\n", s.id, s.studentID, s.name, s.gender, s.className, s.phonenumber);
+            printf("æ‰¾åˆ°å­¦ç”Ÿ: %d\t%d\t%s\t%s\t%s\t%s\n", s.id, s.studentID, s.name, s.gender, s.className, s.phonenumber);
             return;
         }
     }
-    printf("Î´ÕÒµ½¸ÃÑ§Éú£¡\n");
+    printf("æœªæ‰¾åˆ°è¯¥å­¦ç”Ÿï¼\n");
 }
 
-// É¾³ıÑ§Éú
+// åˆ é™¤å­¦ç”Ÿ
 void deleteStudent(StudentList *list) {
     int sid, found = 0;
-    printf("ÇëÊäÈëÒªÉ¾³ıµÄÑ§ºÅ: ");
+    printf("è¯·è¾“å…¥è¦åˆ é™¤çš„å­¦å·: ");
     scanf_s("%d", &sid);
     for (int i = 0; i < list->length; i++) {
         if (list->students[i].studentID == sid) {
@@ -82,48 +82,48 @@ void deleteStudent(StudentList *list) {
             }
             list->length--;
             found = 1;
-            printf("É¾³ı³É¹¦£¡\n");
+            printf("åˆ é™¤æˆåŠŸï¼\n");
             break;
         }
     }
     if (!found) {
-        printf("Î´ÕÒµ½¸ÃÑ§Éú£¡\n");
+        printf("æœªæ‰¾åˆ°è¯¥å­¦ç”Ÿï¼\n");
     }
 }
 
-// ĞŞ¸ÄÑ§ÉúĞÅÏ¢
+// ä¿®æ”¹å­¦ç”Ÿä¿¡æ¯
 void modifyStudent(StudentList *list) {
     int sid;
-    printf("ÇëÊäÈëÒªĞŞ¸ÄµÄÑ§ºÅ: ");
+    printf("è¯·è¾“å…¥è¦ä¿®æ”¹çš„å­¦å·: ");
     scanf_s("%d", &sid);
     for (int i = 0; i < list->length; i++) {
         if (list->students[i].studentID == sid) {
-            printf("ÇëÊäÈëĞÂĞÕÃû: ");
+            printf("è¯·è¾“å…¥æ–°å§“å: ");
             scanf_s("%s", list->students[i].name, sizeof(list->students[i].name));
-            printf("ÇëÊäÈëĞÂĞÔ±ğ: ");
+            printf("è¯·è¾“å…¥æ–°æ€§åˆ«: ");
             scanf_s("%s", list->students[i].gender, sizeof(list->students[i].gender));
-            printf("ÇëÊäÈëĞÂ°à¼¶: ");
+            printf("è¯·è¾“å…¥æ–°ç­çº§: ");
             scanf_s("%s", list->students[i].className, sizeof(list->students[i].className));
-            printf("ÇëÊäÈëĞÂÊÖ»úºÅ: ");
+            printf("è¯·è¾“å…¥æ–°æ‰‹æœºå·: ");
             scanf_s("%s", list->students[i].phonenumber, sizeof(list->students[i].phonenumber));
-            printf("ĞŞ¸Ä³É¹¦£¡\n");
+            printf("ä¿®æ”¹æˆåŠŸï¼\n");
             return;
         }
     }
-    printf("Î´ÕÒµ½¸ÃÑ§Éú£¡\n");
+    printf("æœªæ‰¾åˆ°è¯¥å­¦ç”Ÿï¼\n");
 }
 
-// Çå¿ÕÑ§ÉúÁĞ±í
+// æ¸…ç©ºå­¦ç”Ÿåˆ—è¡¨
 void clearList(StudentList *list) {
     list->length = 0;
-    printf("ÒÑÇå¿ÕËùÓĞÑ§ÉúĞÅÏ¢£¡\n");
+    printf("å·²æ¸…ç©ºæ‰€æœ‰å­¦ç”Ÿä¿¡æ¯ï¼\n");
 }
 
-// ±£´æµ½ÎÄ¼ş
+// ä¿å­˜åˆ°æ–‡ä»¶
 void saveToFile(StudentList *list, const char *filename) {
     FILE *fp = fopen(filename, "w");
     if (!fp) {
-        printf("ÎÄ¼ş±£´æÊ§°Ü£¡\n");
+        printf("æ–‡ä»¶ä¿å­˜å¤±è´¥ï¼\n");
         return;
     }
     for (int i = 0; i < list->length; i++) {
@@ -131,14 +131,14 @@ void saveToFile(StudentList *list, const char *filename) {
         fprintf(fp, "%d %d %s %s %s %s\n", s.id, s.studentID, s.name, s.gender, s.className, s.phonenumber);
     }
     fclose(fp);
-    printf("±£´æµ½ÎÄ¼ş³É¹¦£¡\n");
+    printf("ä¿å­˜åˆ°æ–‡ä»¶æˆåŠŸï¼\n");
 }
 
-// ´ÓÎÄ¼ş¶ÁÈ¡
+// ä»æ–‡ä»¶è¯»å–
 void loadFromFile(StudentList *list, const char *filename) {
     FILE *fp = fopen(filename, "r");
     if (!fp) {
-        printf("ÎÄ¼ş¶ÁÈ¡Ê§°Ü£¡\n");
+        printf("æ–‡ä»¶è¯»å–å¤±è´¥ï¼\n");
         return;
     }
     list->length = 0;
@@ -147,10 +147,10 @@ void loadFromFile(StudentList *list, const char *filename) {
         list->students[list->length++] = s;
     }
     fclose(fp);
-    printf("¶ÁÈ¡ÎÄ¼ş³É¹¦£¡\n");
+    printf("è¯»å–æ–‡ä»¶æˆåŠŸï¼\n");
 }
 
-// ÇåÆÁ
+// æ¸…å±
 void clearScreen() {
     for (int i = 0; i < 50; i++) {
         printf("\n");
@@ -159,21 +159,21 @@ void clearScreen() {
 
 void modifyID(StudentList *list) {
     int oldID, newID, found = 0;
-    printf("ÇëÊäÈëÒªĞŞ¸Ä±àºÅµÄÑ§ºÅ: ");
+    printf("è¯·è¾“å…¥è¦ä¿®æ”¹ç¼–å·çš„å­¦å·: ");
     scanf_s("%d", &oldID);
     for (int i = 0; i < list->length; i++) {
         if (list->students[i].studentID == oldID) {
-            printf("µ±Ç°±àºÅÎª: %d\n", list->students[i].id);
-            printf("ÇëÊäÈëĞÂ±àºÅ: ");
+            printf("å½“å‰ç¼–å·ä¸º: %d\n", list->students[i].id);
+            printf("è¯·è¾“å…¥æ–°ç¼–å·: ");
             scanf_s("%d", &newID);
             list->students[i].id = newID;
-            printf("±àºÅĞŞ¸Ä³É¹¦£¡\n");
+            printf("ç¼–å·ä¿®æ”¹æˆåŠŸï¼\n");
             found = 1;
             break;
         }
     }
     if (!found) {
-        printf("Î´ÕÒµ½¸ÃÑ§Éú£¡\n");
+        printf("æœªæ‰¾åˆ°è¯¥å­¦ç”Ÿï¼\n");
     }
 }
 
@@ -184,20 +184,20 @@ int main() {
     int choice;
     char filename[100] = "students.txt";
     while (1) {
-        printf("\nĞ¡ĞÍÑ§ÉúĞÅÏ¢¹ÜÀíÏµÍ³\n");
-        printf("1. ³õÊ¼»¯\n");
-        printf("2. Êä³ö\n");
-        printf("3. ²åÈë\n");
-        printf("4. É¾³ı\n");
-        printf("5. ĞŞ¸Ä\n");
-        printf("6. ²éÕÒ\n");
-        printf("7. Çå¿Õ\n");
-        printf("8. ¶ÁÎÄ¼ş\n");
-        printf("9. Ğ´ÎÄ¼ş\n");
-        printf("10. ĞŞ¸Ä±àºÅ\n"); // ĞÂÔö²Ëµ¥Ïî
-        printf("0. ÇåÆÁ\n");
-        printf("886. ÍË³ö\n");
-        printf("ÇëÑ¡Ôñ: ");
+        printf("\nå°å‹å­¦ç”Ÿä¿¡æ¯ç®¡ç†ç³»ç»Ÿ\n");
+        printf("1. åˆå§‹åŒ–\n");
+        printf("2. è¾“å‡º\n");
+        printf("3. æ’å…¥\n");
+        printf("4. åˆ é™¤\n");
+        printf("5. ä¿®æ”¹\n");
+        printf("6. æŸ¥æ‰¾\n");
+        printf("7. æ¸…ç©º\n");
+        printf("8. è¯»æ–‡ä»¶\n");
+        printf("9. å†™æ–‡ä»¶\n");
+        printf("10. ä¿®æ”¹ç¼–å·\n"); // æ–°å¢èœå•é¡¹
+        printf("0. æ¸…å±\n");
+        printf("886. é€€å‡º\n");
+        printf("è¯·é€‰æ‹©: ");
         scanf_s("%d", &choice);
         switch (choice) {
             case 1: init(&list); break;
@@ -209,10 +209,10 @@ int main() {
             case 7: clearList(&list); break;
             case 8: loadFromFile(&list, filename); break;
             case 9: saveToFile(&list, filename); break;
-            case 10: modifyID(&list); break; // ĞÂÔö¹¦ÄÜ
+            case 10: modifyID(&list); break; // æ–°å¢åŠŸèƒ½
             case 0: clearScreen(); break;
             case 886: return 0;
-            default: printf("ÎŞĞ§Ñ¡Ôñ£¡\n");
+            default: printf("æ— æ•ˆé€‰æ‹©ï¼\n");
         }
     }
     return 0;

@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <cstdio>
 #include <cstring> 
 using namespace std;
@@ -21,37 +21,37 @@ public:
 
     void init() {
         length = 0;
-        cout << "³õÊ¼»¯Íê³É£¡" << endl;
+        cout << "åˆå§‹åŒ–å®Œæˆï¼" << endl;
     }
 
     void addStudent() {
         if (length >= MAX) {
-            cout << "Ñ§ÉúÊýÁ¿ÒÑ´ïÉÏÏÞ£¡" << endl;
+            cout << "å­¦ç”Ÿæ•°é‡å·²è¾¾ä¸Šé™ï¼" << endl;
             return;
         }
         Student s;
-        cout << "ÇëÊäÈëÑ§ºÅ: ";
+        cout << "è¯·è¾“å…¥å­¦å·: ";
         cin >> s.studentID;
-        cout << "ÇëÊäÈëÐÕÃû: ";
+        cout << "è¯·è¾“å…¥å§“å: ";
         cin >> s.name;
-        cout << "ÇëÊäÈëÐÔ±ð: ";
+        cout << "è¯·è¾“å…¥æ€§åˆ«: ";
         cin >> s.gender;
-        cout << "ÇëÊäÈë°à¼¶: ";
+        cout << "è¯·è¾“å…¥ç­çº§: ";
         cin >> s.className;
-        cout << "ÇëÊäÈëÊÖ»úºÅ: ";
+        cout << "è¯·è¾“å…¥æ‰‹æœºå·: ";
         cin >> s.phonenumber;
         s.id = length + 1;
         students[length++] = s;
-        cout << "Ìí¼Ó³É¹¦£¡" << endl;
+        cout << "æ·»åŠ æˆåŠŸï¼" << endl;
     }
 
 void showAll() {
-    cout << "±àºÅ    Ñ§ºÅ        ÐÕÃû        ÐÔ±ð    °à¼¶        ÊÖ»úºÅ" << endl;
+    cout << "ç¼–å·    å­¦å·        å§“å        æ€§åˆ«    ç­çº§        æ‰‹æœºå·" << endl;
     for (int i = 0; i < length; i++) {
         cout << students[i].id << "    "
              << students[i].studentID << "    ";
 
-        // ÐÕÃû²¹×ã¿í¶È
+        // å§“åè¡¥è¶³å®½åº¦
         cout << students[i].name;
         int nameLen = strlen(students[i].name);
         for (int k = 0; k < 10 - nameLen * 2; k++) cout << " ";
@@ -70,11 +70,11 @@ void showAll() {
 
     void findStudent() {
         int sid;
-        cout << "ÇëÊäÈëÒª²éÕÒµÄÑ§ºÅ: ";
+        cout << "è¯·è¾“å…¥è¦æŸ¥æ‰¾çš„å­¦å·: ";
         cin >> sid;
         for (int i = 0; i < length; i++) {
             if (students[i].studentID == sid) {
-                printf("ÕÒµ½Ñ§Éú: %d  %d  %s  %s  %s  %s\n",
+                printf("æ‰¾åˆ°å­¦ç”Ÿ: %d  %d  %s  %s  %s  %s\n",
                     students[i].id,
                     students[i].studentID,
                     students[i].name,
@@ -84,12 +84,12 @@ void showAll() {
                 return;
             }
         }
-        cout << "Î´ÕÒµ½¸ÃÑ§Éú£¡" << endl;
+        cout << "æœªæ‰¾åˆ°è¯¥å­¦ç”Ÿï¼" << endl;
     }
 
     void deleteStudent() {
         int sid;
-        cout << "ÇëÊäÈëÒªÉ¾³ýµÄÑ§ºÅ: ";
+        cout << "è¯·è¾“å…¥è¦åˆ é™¤çš„å­¦å·: ";
         cin >> sid;
         for (int i = 0; i < length; i++) {
             if (students[i].studentID == sid) {
@@ -97,43 +97,43 @@ void showAll() {
                     students[j] = students[j + 1];
                 }
                 length--;
-                cout << "É¾³ý³É¹¦£¡" << endl;
+                cout << "åˆ é™¤æˆåŠŸï¼" << endl;
                 return;
             }
         }
-        cout << "Î´ÕÒµ½¸ÃÑ§Éú£¡" << endl;
+        cout << "æœªæ‰¾åˆ°è¯¥å­¦ç”Ÿï¼" << endl;
     }
 
     void modifyStudent() {
         int sid;
-        cout << "ÇëÊäÈëÒªÐÞ¸ÄµÄÑ§ºÅ: ";
+        cout << "è¯·è¾“å…¥è¦ä¿®æ”¹çš„å­¦å·: ";
         cin >> sid;
         for (int i = 0; i < length; i++) {
             if (students[i].studentID == sid) {
-                cout << "ÇëÊäÈëÐÂÐÕÃû: ";
+                cout << "è¯·è¾“å…¥æ–°å§“å: ";
                 cin >> students[i].name;
-                cout << "ÇëÊäÈëÐÂÐÔ±ð: ";
+                cout << "è¯·è¾“å…¥æ–°æ€§åˆ«: ";
                 cin >> students[i].gender;
-                cout << "ÇëÊäÈëÐÂ°à¼¶: ";
+                cout << "è¯·è¾“å…¥æ–°ç­çº§: ";
                 cin >> students[i].className;
-                cout << "ÇëÊäÈëÐÂÊÖ»úºÅ: ";
+                cout << "è¯·è¾“å…¥æ–°æ‰‹æœºå·: ";
                 cin >> students[i].phonenumber;
-                cout << "ÐÞ¸Ä³É¹¦£¡" << endl;
+                cout << "ä¿®æ”¹æˆåŠŸï¼" << endl;
                 return;
             }
         }
-        cout << "Î´ÕÒµ½¸ÃÑ§Éú£¡" << endl;
+        cout << "æœªæ‰¾åˆ°è¯¥å­¦ç”Ÿï¼" << endl;
     }
 
     void clearList() {
         length = 0;
-        cout << "ÒÑÇå¿ÕËùÓÐÑ§ÉúÐÅÏ¢£¡" << endl;
+        cout << "å·²æ¸…ç©ºæ‰€æœ‰å­¦ç”Ÿä¿¡æ¯ï¼" << endl;
     }
 
     void saveToFile(const char* filename) {
         FILE* fp = fopen(filename, "w");
         if (!fp) {
-            cout << "ÎÄ¼þ±£´æÊ§°Ü£¡" << endl;
+            cout << "æ–‡ä»¶ä¿å­˜å¤±è´¥ï¼" << endl;
             return;
         }
         for (int i = 0; i < length; i++) {
@@ -146,13 +146,13 @@ void showAll() {
                 students[i].phonenumber);
         }
         fclose(fp);
-        cout << "±£´æµ½ÎÄ¼þ³É¹¦£¡" << endl;
+        cout << "ä¿å­˜åˆ°æ–‡ä»¶æˆåŠŸï¼" << endl;
     }
 
     void loadFromFile(const char* filename) {
         FILE* fp = fopen(filename, "r");
         if (!fp) {
-            cout << "ÎÄ¼þ¶ÁÈ¡Ê§°Ü£¡" << endl;
+            cout << "æ–‡ä»¶è¯»å–å¤±è´¥ï¼" << endl;
             return;
         }
         length = 0;
@@ -162,7 +162,7 @@ void showAll() {
             students[length++] = s;
         }
         fclose(fp);
-        cout << "¶ÁÈ¡ÎÄ¼þ³É¹¦£¡" << endl;
+        cout << "è¯»å–æ–‡ä»¶æˆåŠŸï¼" << endl;
     }
 
     void clearScreen() {
@@ -171,19 +171,19 @@ void showAll() {
 
     void modifyID() {
         int sid, newID;
-        cout << "ÇëÊäÈëÒªÐÞ¸Ä±àºÅµÄÑ§ºÅ: ";
+        cout << "è¯·è¾“å…¥è¦ä¿®æ”¹ç¼–å·çš„å­¦å·: ";
         cin >> sid;
         for (int i = 0; i < length; i++) {
             if (students[i].studentID == sid) {
-                cout << "µ±Ç°±àºÅÎª: " << students[i].id << endl;
-                cout << "ÇëÊäÈëÐÂ±àºÅ: ";
+                cout << "å½“å‰ç¼–å·ä¸º: " << students[i].id << endl;
+                cout << "è¯·è¾“å…¥æ–°ç¼–å·: ";
                 cin >> newID;
                 students[i].id = newID;
-                cout << "±àºÅÐÞ¸Ä³É¹¦£¡" << endl;
+                cout << "ç¼–å·ä¿®æ”¹æˆåŠŸï¼" << endl;
                 return;
             }
         }
-        cout << "Î´ÕÒµ½¸ÃÑ§Éú£¡" << endl;
+        cout << "æœªæ‰¾åˆ°è¯¥å­¦ç”Ÿï¼" << endl;
     }
 };
 
@@ -192,20 +192,20 @@ int main() {
     int choice;
     const char* filename = "students.txt";
     while (true) {
-        cout << "\nÑ§ÉúÐÅÏ¢¹ÜÀíÏµÍ³" << endl;
-        cout << "1. ³õÊ¼»¯" << endl;
-        cout << "2. Êä³ö" << endl;
-        cout << "3. ²åÈë" << endl;
-        cout << "4. É¾³ý" << endl;
-        cout << "5. ÐÞ¸Ä" << endl;
-        cout << "6. ²éÕÒ" << endl;
-        cout << "7. Çå¿Õ" << endl;
-        cout << "8. ¶ÁÎÄ¼þ" << endl;
-        cout << "9. Ð´ÎÄ¼þ" << endl;
-        cout << "10. ÐÞ¸Ä±àºÅ" << endl;
-        cout << "0. ÇåÆÁ" << endl;
-        cout << "886. ÍË³ö" << endl;
-        cout << "ÇëÑ¡Ôñ: ";
+        cout << "\nå­¦ç”Ÿä¿¡æ¯ç®¡ç†ç³»ç»Ÿ" << endl;
+        cout << "1. åˆå§‹åŒ–" << endl;
+        cout << "2. è¾“å‡º" << endl;
+        cout << "3. æ’å…¥" << endl;
+        cout << "4. åˆ é™¤" << endl;
+        cout << "5. ä¿®æ”¹" << endl;
+        cout << "6. æŸ¥æ‰¾" << endl;
+        cout << "7. æ¸…ç©º" << endl;
+        cout << "8. è¯»æ–‡ä»¶" << endl;
+        cout << "9. å†™æ–‡ä»¶" << endl;
+        cout << "10. ä¿®æ”¹ç¼–å·" << endl;
+        cout << "0. æ¸…å±" << endl;
+        cout << "886. é€€å‡º" << endl;
+        cout << "è¯·é€‰æ‹©: ";
         cin >> choice;
         switch (choice) {
             case 1: list.init(); break;
@@ -220,7 +220,7 @@ int main() {
             case 10: list.modifyID(); break;
             case 0: list.clearScreen(); break;
             case 886: return 0;
-            default: cout << "ÎÞÐ§Ñ¡Ôñ£¡" << endl;
+            default: cout << "æ— æ•ˆé€‰æ‹©ï¼" << endl;
         }
     }
     return 0;
