@@ -1,0 +1,21 @@
+{
+    "files.encoding": "utf8",
+    "files.autoGuessEncoding": true,
+    "files.eol": "\n",
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "terminal.integrated.env.windows": {
+        "PYTHONIOENCODING": "utf-8",
+        "LANG": "zh_CN.UTF-8"
+    },
+    "terminal.integrated.shellArgs.windows": [
+        "-NoExit",
+        "-Command",
+        "chcp 65001"
+    ],
+    "[c]": {
+        "files.encoding": "utf8"
+    },
+    "[cpp]": {
+        "files.encoding": "utf8"
+    }
+}

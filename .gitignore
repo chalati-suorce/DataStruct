@@ -97,3 +97,7 @@ jspm_packages/
 *.njsproj
 *.sln
 *.sw?
+
+# Script files (keep these in version control)
+#!fix_encoding.bat
+#!convert_to_utf8.ps1
