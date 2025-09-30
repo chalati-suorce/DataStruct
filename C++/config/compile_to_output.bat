@@ -12,7 +12,8 @@ if "%~1"=="" (
 
 REM Get source filename (without extension)
 set "source_file=%~1"
-set "output_dir=output"
+set "source_dir=%~dp1"
+set "output_dir=%source_dir%output"
 set "exe_name=%~n1.exe"
 
 REM Check if output directory exists, create if not

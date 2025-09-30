@@ -5,7 +5,11 @@ param(
 )
 
 # Get source filename (without extension)
-$outputDir = "output"
+$sourceDir = [System.IO.Path]::GetDirectoryName($SourceFile)
+if ([string]::IsNullOrEmpty($sourceDir)) {
+    $sourceDir = "."
+}
+$outputDir = Join-Path $sourceDir "output"
 $exeName = [System.IO.Path]::GetFileNameWithoutExtension($SourceFile) + ".exe"
 $outputPath = Join-Path $outputDir $exeName
 
