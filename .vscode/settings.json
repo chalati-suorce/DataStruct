@@ -1,27 +1,16 @@
 {
-    "files.encoding": "utf8",
+    // 保持默认编码设置
     "files.autoGuessEncoding": true,
-    "files.eol": "\n",
+    
+    // 保持默认终端设置
     "terminal.integrated.defaultProfile.windows": "PowerShell",
-    "terminal.integrated.env.windows": {
-        "PYTHONIOENCODING": "utf-8",
-        "LANG": "zh_CN.UTF-8"
-    },
-    "terminal.integrated.shellArgs.windows": [
-        "-NoExit",
-        "-Command",
-        "chcp 65001"
-    ],
-    "[c]": {
-        "files.encoding": "utf8"
-    },
-    "[cpp]": {
-        "files.encoding": "utf8"
-    },
-    "code-runner.executorMap": {
-        "c": "cd $dir && gcc \"$fileName\" -o \"output/$fileNameWithoutExt.exe\" && echo Compiled to output/$fileNameWithoutExt.exe",
-        "cpp": "cd $dir && g++ \"$fileName\" -o \"output/$fileNameWithoutExt.exe\" && echo Compiled to output/$fileNameWithoutExt.exe"
-    },
-    "code-runner.runInTerminal": true,
-    "code-runner.saveAllFilesBeforeRun": true
+    
+    // C/C++配置
+    "C_Cpp.default.cppStandard": "c++17",
+    "C_Cpp.default.cStandard": "c17",
+    
+    // 其他设置
+    "editor.fontSize": 14,
+    "editor.wordWrap": "on",
+    "editor.minimap.enabled": false
 }

@@ -84,8 +84,63 @@ C/Unit2/output/
 3. **脚本位置**：所有编译脚本位于 `C/config/` 目录下
 4. **文档更新**：已更新 `C/config/README_compile_to_output.md` 包含新的批量编译功能
 
+## 已解决的额外问题
+
+### 1. 外部终端中文乱码问题
+**解决方案：**
+- 创建了 `config/fix_encoding_simple.ps1` 脚本
+- 自动设置终端编码为UTF-8（65001）
+- 转换所有C/C++文件为UTF-8编码
+- 验证终端编码设置
+
+**使用方法：**
+```powershell
+config\fix_encoding_simple.ps1
+```
+
+### 2. 调试时exe文件生成位置问题
+**解决方案：**
+- 修改了 `.vscode/tasks.json` 中的编译输出路径
+- 修改了 `.vscode/launch.json` 中的调试程序路径
+- 现在调试时exe文件会生成到 `output` 目录
+
+**配置变更：**
+- `tasks.json`: 输出路径改为 `${fileDirname}\\output\\${fileBasenameNoExtension}.exe`
+- `launch.json`: 程序路径改为 `${workspaceFolder}\\${relativeFileDirname}\\output\\${fileBasenameNoExtension}.exe`
+
+## 中文乱码问题的根本解决方案
+
+### 问题根源
+中文乱码的根本原因是**终端字体不支持UTF-8中文显示**。虽然编码已正确设置为UTF-8，但字体无法渲染中文字符。
+
+### 完整解决方案
+1. **编码层面** ✅ 已完成
+   - 终端编码设置为UTF-8 (65001)
+   - 所有C/C++文件转换为UTF-8编码
+   - VSCode配置了UTF-8环境
+
+2. **字体层面** ⚠️ 需要手动设置
+   - 创建了详细的字体设置指南：`config/FONT_SETUP_GUIDE.md`
+   - 配置了VSCode字体设置
+   - 提供了多种字体解决方案
+
+### 字体设置方法
+请按照 `config/FONT_SETUP_GUIDE.md` 中的指南设置终端字体：
+
+1. **VSCode终端字体设置**
+2. **Windows终端字体设置** 
+3. **系统字体安装**
+
+### 验证方法
+运行以下命令测试中文显示：
+```powershell
+config\fix_chinese_encoding_final.ps1
+```
+
 ## 后续维护
 
 - 新创建的C文件建议使用UTF-8编码
 - 使用提供的编译脚本确保exe文件输出到正确位置
 - 定期运行编码转换脚本保持编码一致性
+- 调试时exe文件会自动生成到output目录
+- 如果更换终端环境，请检查字体设置

@@ -10,7 +10,7 @@
                 "-g",  // 生成调试信息（必须加，否则无法调试）
                 "${file}",  // 编译当前打开的文件
                 "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe"  // 输出的可执行文件路径
+                "${fileDirname}\\output\\${fileBasenameNoExtension}.exe"  // 输出的可执行文件路径到output目录
             ],
             "options": {
                 "cwd": "${fileDirname}"

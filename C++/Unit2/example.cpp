@@ -126,3 +126,5 @@ int main (){
     SequentialListDestroy(&list);
 
 }
+
+
