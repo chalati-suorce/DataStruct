@@ -1,16 +1,120 @@
 {
-    "version": "2.0.0",  // 任务配置的版本
+    "version": "2.0.0",
     "tasks": [
         {
+            "label": "build-c-program",
+            "type": "shell",
+            "command": "gcc",
+            "args": [
+                "-g",
+                "-o",
+                "${workspaceFolder}/C/output/${fileBasenameNoExtension}.exe",
+                "${file}"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "build-cpp-program",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-g",
+                "-o",
+                "${workspaceFolder}/C++/output/${fileBasenameNoExtension}.exe",
+                "${file}"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "build-c-program-debug",
+            "type": "shell",
+            "command": "gcc",
+            "args": [
+                "-g",
+                "-O0",
+                "-Wall",
+                "-Wextra",
+                "-o",
+                "${workspaceFolder}/C/output/${fileBasenameNoExtension}.exe",
+                "${file}"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "build-cpp-program-debug",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-g",
+                "-O0",
+                "-Wall",
+                "-Wextra",
+                "-o",
+                "${workspaceFolder}/C++/output/${fileBasenameNoExtension}.exe",
+                "${file}"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
             "type": "cppbuild",
-            "label": "C/C++: g++ 生成活动文件",  // 与launch中的preLaunchTask完全一致
-            "command": "E://MSYS//ucrt64//bin//g++.exe",  // 与gdb同属ucrt64环境（统一工具链）
+            "label": "C/C++: g++.exe 生成活动文件",
+            "command": "D:\\MSYS\\mingw64\\bin\\g++.exe",
             "args": [
                 "-fdiagnostics-color=always",
-                "-g",  // 生成调试信息（必须加，否则无法调试）
-                "${file}",  // 编译当前打开的文件
+                "-g",
+                "${file}",
                 "-o",
-                "${fileDirname}\\output\\${fileBasenameNoExtension}.exe"  // 输出的可执行文件路径到output目录
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],
             "options": {
                 "cwd": "${fileDirname}"

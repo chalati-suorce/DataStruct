@@ -1,0 +1,46 @@
+# Compiled executables
+*.exe
+*.out
+*.app
+
+# Object files
+*.o
+*.obj
+
+# Libraries
+*.lib
+*.a
+*.dll
+*.so
+*.dylib
+
+# Debug files
+*.pdb
+*.idb
+*.ilk
+
+# Build directories
+build/
+dist/
+out/
+bin/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Project specific output directories
+C/output/
+C++/output/
+C/Unit2/output/
+C++/Unit2/output/
+
+# Temporary files
+*.tmp
+*.temp

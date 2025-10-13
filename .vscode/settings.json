@@ -1,16 +1,19 @@
 {
-    // 保持默认编码设置
-    "files.autoGuessEncoding": true,
-    
-    // 保持默认终端设置
-    "terminal.integrated.defaultProfile.windows": "PowerShell",
-    
-    // C/C++配置
+    "C_Cpp.default.compilerPath": "D:/MSYS/mingw64/bin/gcc.exe",
+    "C_Cpp.default.intelliSenseMode": "windows-gcc-x64",
     "C_Cpp.default.cppStandard": "c++17",
     "C_Cpp.default.cStandard": "c17",
-    
-    // 其他设置
-    "editor.fontSize": 14,
-    "editor.wordWrap": "on",
-    "editor.minimap.enabled": false
+    "files.associations": {
+        "*.c": "c",
+        "*.cpp": "cpp",
+        "*.h": "c",
+        "*.hpp": "cpp"
+    },
+    "code-runner.executorMap": {
+        "c": "cd $dir && gcc -g -o $workspaceRoot/C/output/$fileNameWithoutExt.exe $fileName && $workspaceRoot/C/output/$fileNameWithoutExt.exe",
+        "cpp": "cd $dir && g++ -g -o $workspaceRoot/C++/output/$fileNameWithoutExt.exe $fileName && $workspaceRoot/C++/output/$fileNameWithoutExt.exe"
+    },
+    "code-runner.runInTerminal": true,
+    "code-runner.preserveFocus": false,
+    "code-runner.clearPreviousOutput": true
 }
