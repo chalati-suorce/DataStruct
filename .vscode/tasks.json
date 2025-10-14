@@ -8,7 +8,7 @@
             "args": [
                 "-g",
                 "-o",
-                "${workspaceFolder}/C/output/${fileBasenameNoExtension}.exe",
+                "${fileDirname}\\output\\${fileBasenameNoExtension}.exe",
                 "${file}"
             ],
             "group": {
@@ -34,7 +34,7 @@
             "args": [
                 "-g",
                 "-o",
-                "${workspaceFolder}/C++/output/${fileBasenameNoExtension}.exe",
+                "${fileDirname}\\output\\${fileBasenameNoExtension}.exe",
                 "${file}"
             ],
             "group": {
@@ -63,7 +63,7 @@
                 "-Wall",
                 "-Wextra",
                 "-o",
-                "${workspaceFolder}/C/output/${fileBasenameNoExtension}.exe",
+                "${fileDirname}\\output\\${fileBasenameNoExtension}.exe",
                 "${file}"
             ],
             "group": "build",
@@ -89,7 +89,7 @@
                 "-Wall",
                 "-Wextra",
                 "-o",
-                "${workspaceFolder}/C++/output/${fileBasenameNoExtension}.exe",
+                "${fileDirname}\\output\\${fileBasenameNoExtension}.exe",
                 "${file}"
             ],
             "group": "build",
@@ -114,7 +114,7 @@
                 "-g",
                 "${file}",
                 "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+                "${fileDirname}\\output\\${fileBasenameNoExtension}.exe"
             ],
             "options": {
                 "cwd": "${fileDirname}"
