@@ -4,7 +4,7 @@
         {
             "label": "build-c-program",
             "type": "shell",
-            "command": "gcc",
+            "command": "E:\\MSYS\\mingw64\\bin\\gcc.exe",
             "args": [
                 "-g",
                 "-o",
@@ -30,7 +30,7 @@
         {
             "label": "build-cpp-program",
             "type": "shell",
-            "command": "g++",
+            "command": "E:\\MSYS\\mingw64\\bin\\g++.exe",
             "args": [
                 "-g",
                 "-o",
@@ -56,7 +56,7 @@
         {
             "label": "build-c-program-debug",
             "type": "shell",
-            "command": "gcc",
+            "command": "E:\\MSYS\\mingw64\\bin\\gcc.exe",
             "args": [
                 "-g",
                 "-O0",
@@ -82,7 +82,7 @@
         {
             "label": "build-cpp-program-debug",
             "type": "shell",
-            "command": "g++",
+            "command": "E:\\MSYS\\mingw64\\bin\\g++.exe",
             "args": [
                 "-g",
                 "-O0",

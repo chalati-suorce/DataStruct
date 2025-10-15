@@ -7,11 +7,12 @@
         "*.c": "c",
         "*.cpp": "cpp",
         "*.h": "c",
-        "*.hpp": "cpp"
+        "*.hpp": "cpp",
+        "random": "c"
     },
     "code-runner.executorMap": {
-        "c": "cd $dir && gcc -g -o $workspaceRoot/C/output/$fileNameWithoutExt.exe $fileName && $workspaceRoot/C/output/$fileNameWithoutExt.exe",
-        "cpp": "cd $dir && g++ -g -o $workspaceRoot/C++/output/$fileNameWithoutExt.exe $fileName && $workspaceRoot/C++/output/$fileNameWithoutExt.exe"
+        "c": "cd $dir && E:\\MSYS\\mingw64\\bin\\gcc.exe -g -o $workspaceRoot\\$relativeDir\\output\\$fileNameWithoutExt.exe $fileName && $workspaceRoot\\$relativeDir\\output\\$fileNameWithoutExt.exe",
+        "cpp": "cd $dir && E:\\MSYS\\mingw64\\bin\\g++.exe -g -o $workspaceRoot\\$relativeDir\\output\\$fileNameWithoutExt.exe $fileName && $workspaceRoot\\$relativeDir\\output\\$fileNameWithoutExt.exe"
     },
     "code-runner.runInTerminal": true,
     "code-runner.preserveFocus": false,
