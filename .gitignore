@@ -44,7 +44,3 @@ C++/Unit2/output/
 # 临时文件
 *.tmp
 *.temp
-.vscode/c_cpp_properties.json
-.vscode/launch.json
-.vscode/settings.json
-.vscode/settings.json
