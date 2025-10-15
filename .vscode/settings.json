@@ -1,5 +1,5 @@
 {
-    "C_Cpp.default.compilerPath": "E:/MSYS/mingw64/bin/gcc.exe",
+    "C_Cpp.default.compilerPath": "D:/MSYS/mingw64/bin/gcc.exe",
     "C_Cpp.default.intelliSenseMode": "windows-gcc-x64",
     "C_Cpp.default.cppStandard": "c++17",
     "C_Cpp.default.cStandard": "c17",
@@ -16,8 +16,8 @@
         "Multi-keyword sort.C": "cpp"
     },
     "code-runner.executorMap": {
-        "c": "cd $dir && E:\\MSYS\\mingw64\\bin\\gcc.exe -g -o $workspaceRoot\\$relativeDir\\output\\$fileNameWithoutExt.exe $fileName && $workspaceRoot\\$relativeDir\\output\\$fileNameWithoutExt.exe",
-        "cpp": "cd $dir && E:\\MSYS\\mingw64\\bin\\g++.exe -g -o $workspaceRoot\\$relativeDir\\output\\$fileNameWithoutExt.exe $fileName && $workspaceRoot\\$relativeDir\\output\\$fileNameWithoutExt.exe"
+        "c": "cd $dir && D:\\MSYS\\mingw64\\bin\\gcc.exe -g -o $workspaceRoot\\$relativeDir\\output\\$fileNameWithoutExt.exe $fileName && $workspaceRoot\\$relativeDir\\output\\$fileNameWithoutExt.exe",
+        "cpp": "cd $dir && D:\\MSYS\\mingw64\\bin\\g++.exe -g -o $workspaceRoot\\$relativeDir\\output\\$fileNameWithoutExt.exe $fileName && $workspaceRoot\\$relativeDir\\output\\$fileNameWithoutExt.exe"
     },
     "code-runner.runInTerminal": true,
     "code-runner.preserveFocus": false,

@@ -31,9 +31,6 @@ bin/
 *.swp
 *.swo
 
-# JSON 配置文件
-*.json
-
 # 操作系统生成的文件
 .DS_Store
 Thumbs.db
@@ -47,3 +44,7 @@ C++/Unit2/output/
 # 临时文件
 *.tmp
 *.temp
+.vscode/c_cpp_properties.json
+.vscode/launch.json
+.vscode/settings.json
+.vscode/settings.json
