@@ -1,46 +1,49 @@
-# Compiled executables
+# 编译生成的可执行文件
 *.exe
 *.out
 *.app
 
-# Object files
+# 目标文件
 *.o
 *.obj
 
-# Libraries
+# 库文件
 *.lib
 *.a
 *.dll
 *.so
 *.dylib
 
-# Debug files
+# 调试文件
 *.pdb
 *.idb
 *.ilk
 
-# Build directories
+# 构建目录
 build/
 dist/
 out/
 bin/
 
-# IDE files
+# IDE 文件
 .vscode/
 .idea/
 *.swp
 *.swo
 
-# OS generated files
+# JSON 配置文件
+*.json
+
+# 操作系统生成的文件
 .DS_Store
 Thumbs.db
 
-# Project specific output directories
+# 项目特定的输出目录
 C/output/
 C++/output/
 C/Unit2/output/
 C++/Unit2/output/
 
-# Temporary files
+# 临时文件
 *.tmp
 *.temp
