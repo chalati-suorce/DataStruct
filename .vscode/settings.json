@@ -8,7 +8,12 @@
         "*.cpp": "cpp",
         "*.h": "c",
         "*.hpp": "cpp",
-        "random": "c"
+        "random": "c",
+        "1.C": "cpp",
+        "Demonstration of Balanced Binary Tree Operations.C": "cpp",
+        "Maintenance and Identification of English Dictionary.C": "cpp",
+        "Comparison of Internal Sorting Algorithms.C": "cpp",
+        "Multi-keyword sort.C": "cpp"
     },
     "code-runner.executorMap": {
         "c": "cd $dir && E:\\MSYS\\mingw64\\bin\\gcc.exe -g -o $workspaceRoot\\$relativeDir\\output\\$fileNameWithoutExt.exe $fileName && $workspaceRoot\\$relativeDir\\output\\$fileNameWithoutExt.exe",
