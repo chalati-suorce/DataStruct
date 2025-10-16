@@ -1,40 +1,43 @@
 #include<stdio.h>
+#include<stdlib.h>
+
+#define n 1000//n个数据元素
 
 typedef int elemtype;
 
-#define MAX 1000
-
-typedef struct{
-    char studentid[10];
+struct studentinformartion{
+    char id[6];
     char name[20];
-    char gendar;
-    float GPA;
-    char class[10];
-    int phone[11];
-}student;
+    char sex;
+    int age;
+    char class[20];
+    char phone[12];
+};
 
-typedef struct{
-    elemtype student[MAX];
+struct student{
+    struct studentinformartion data[n];//1、建立一个顺序表，利用一维数组来存储，含有n个数据元素；
     int length;
-}studentlist;
+}s;
 
- void init(studentlist*List){
-    List->length=0;
- }
-
- //增加学生
-int add(studentlist *L,student stu){
-    if(L->length>=MAX){
-    printf("学生数量已达上限");
+//顺序表初始化
+void initlist(struct student *list){
+    list->length = 0;
 }
-for(int i=0;i<L->length;i++){
-    if(L->student[i].studentid==){
 
+//顺序表插入
+int insertlist(struct student *list,struct studentinformartion data,int i){
+    if(list->length==n){
+        printf("顺序表已满，无法插入新数据！\n");
+        return 0;
     }
-}
-
+    if(i<1||i>list->length+1){
+        printf("插入位置无效");
+    }
+     
+printf("请输入要插入的位置(1~%d):",list->length+1);
 }
 
 int main(){
+
     return 0;
 }
