@@ -121,13 +121,177 @@ double GetDoubleTop(DoubleStack *S)
     return S->data[S->top];
 }
 
-// 13. 判断字符是否为运算符
+// 13. 获取字符栈长度
+int GetCharStackLength(CharStack *S)
+{
+    return S->top + 1;
+}
+
+// 14. 获取数字栈长度
+int GetDoubleStackLength(DoubleStack *S)
+{
+    return S->top + 1;
+}
+
+// 15. 十进制转二进制
+void DecimalToBinary(int decimal)
+{
+    CharStack stack;
+    InitCharStack(&stack);
+    
+    printf("十进制数 %d 转换为二进制: ", decimal);
+    
+    if (decimal == 0) {
+        printf("0\n");
+        return;
+    }
+    
+    // 将余数入栈
+    while (decimal > 0) {
+        int remainder = decimal % 2;
+        PushChar(&stack, remainder + '0'); // 将数字转换为字符
+        decimal = decimal / 2;
+    }
+    
+    // 出栈得到二进制结果
+    while (!IsCharStackEmpty(&stack)) {
+        printf("%c", PopChar(&stack));
+    }
+    printf("\n");
+}
+
+// 16. 十进制转八进制
+void DecimalToOctal(int decimal)
+{
+    CharStack stack;
+    InitCharStack(&stack);
+    
+    printf("十进制数 %d 转换为八进制: ", decimal);
+    
+    if (decimal == 0) {
+        printf("0\n");
+        return;
+    }
+    
+    // 将余数入栈
+    while (decimal > 0) {
+        int remainder = decimal % 8;
+        PushChar(&stack, remainder + '0'); // 将数字转换为字符
+        decimal = decimal / 8;
+    }
+    
+    // 出栈得到八进制结果
+    while (!IsCharStackEmpty(&stack)) {
+        printf("%c", PopChar(&stack));
+    }
+    printf("\n");
+}
+
+// 17. 十进制转十六进制
+void DecimalToHexadecimal(int decimal)
+{
+    CharStack stack;
+    InitCharStack(&stack);
+    
+    printf("十进制数 %d 转换为十六进制: ", decimal);
+    
+    if (decimal == 0) {
+        printf("0\n");
+        return;
+    }
+    
+    // 将余数入栈
+    while (decimal > 0) {
+        int remainder = decimal % 16;
+        char hexChar;
+        
+        if (remainder < 10) {
+            hexChar = remainder + '0'; // 0-9
+        } else {
+            hexChar = remainder - 10 + 'A'; // A-F
+        }
+        
+        PushChar(&stack, hexChar);
+        decimal = decimal / 16;
+    }
+    
+    // 出栈得到十六进制结果
+    while (!IsCharStackEmpty(&stack)) {
+        printf("%c", PopChar(&stack));
+    }
+    printf("\n");
+}
+
+// 18. 显示进制转换菜单
+void ShowConversionMenu()
+{
+    printf("\n进制转换系统\n");
+    printf("1. 十进制转二进制\n");
+    printf("2. 十进制转八进制\n");
+    printf("3. 十进制转十六进制\n");
+    printf("4. 返回主菜单\n");
+    printf("请选择操作: ");
+}
+
+// 19. 进制转换系统
+void NumberConversionSystem()
+{
+    int choice;
+    int decimal;
+    
+    while (1) {
+        ShowConversionMenu();
+        scanf("%d", &choice);
+        
+        switch (choice) {
+            case 1:
+                printf("请输入十进制正整数: ");
+                scanf("%d", &decimal);
+                if (decimal < 0) {
+                    printf("错误：请输入正整数！\n");
+                } else {
+                    DecimalToBinary(decimal);
+                }
+                break;
+                
+            case 2:
+                printf("请输入十进制正整数: ");
+                scanf("%d", &decimal);
+                if (decimal < 0) {
+                    printf("错误：请输入正整数！\n");
+                } else {
+                    DecimalToOctal(decimal);
+                }
+                break;
+                
+            case 3:
+                printf("请输入十进制正整数: ");
+                scanf("%d", &decimal);
+                if (decimal < 0) {
+                    printf("错误：请输入正整数！\n");
+                } else {
+                    DecimalToHexadecimal(decimal);
+                }
+                break;
+                
+            case 4:
+                return;
+                
+            default:
+                printf("无效的选择，请重新输入！\n");
+                break;
+        }
+        printf("\n");
+    }
+}
+
+// 20. 判断字符是否为运算符
 int IsOperator(char ch)
 {
     return ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == '^' || ch == '(' || ch == ')';
 }
 
-// 14. 获取运算符优先级
+// 21. 获取运算符优先级
 int GetPriority(char op)
 {
     switch (op)
@@ -147,7 +311,7 @@ int GetPriority(char op)
     }
 }
 
-// 15. 执行运算
+// 22. 执行运算
 double Calculate(double a, double b, char op)
 {
     switch (op)
@@ -172,7 +336,7 @@ double Calculate(double a, double b, char op)
     }
 }
 
-// 16. 中缀表达式转后缀表达式
+// 23. 中缀表达式转后缀表达式
 char *InfixToPostfix(char *infix)
 {
     CharStack opStack;
@@ -243,7 +407,7 @@ char *InfixToPostfix(char *infix)
     return postfix;
 }
 
-// 17. 计算后缀表达式
+// 24. 计算后缀表达式
 double EvaluatePostfix(char *postfix)
 {
     DoubleStack numStack;
@@ -288,7 +452,7 @@ double EvaluatePostfix(char *postfix)
     return PopDouble(&numStack);
 }
 
-// 18. 直接计算中缀表达式
+// 25. 直接计算中缀表达式
 double EvaluateInfix(char *infix)
 {
     CharStack opStack;
@@ -372,7 +536,7 @@ double EvaluateInfix(char *infix)
     return PopDouble(&numStack);
 }
 
-// 19. 验证表达式合法性
+// 26. 验证表达式合法性
 int ValidateExpression(char *expression)
 {
     CharStack bracketStack;
@@ -423,40 +587,42 @@ int ValidateExpression(char *expression)
     return 1;
 }
 
-// 20. 显示菜单
-void ShowMenu()
+// 27. 显示主菜单
+void ShowMainMenu()
+{
+    printf("\n栈的基本操作与进制转换系统\n");
+    printf("1. 表达式求值系统\n");
+    printf("2. 进制转换系统\n");
+    printf("3. 清屏\n");
+    printf("0. 退出系统\n");
+    printf("请选择操作: ");
+}
+
+// 28. 显示表达式求值菜单
+void ShowExpressionMenu()
 {
     printf("\n栈的表达式求值系统\n");
     printf("1. 中缀表达式转后缀表达式\n");
     printf("2. 计算后缀表达式\n");
     printf("3. 直接计算中缀表达式\n");
     printf("4. 验证表达式合法性\n");
-    printf("5. 清屏\n");
-    printf("0. 退出系统\n");
+    printf("5. 返回主菜单\n");
     printf("请选择操作: ");
 }
 
-int main()
+// 29. 表达式求值系统
+void ExpressionEvaluationSystem()
 {
     char expression[100];
     int choice;
 
-    printf("栈的表达式求值系统\n");
-    printf("支持的运算符: +, -, *, /, ^, (, )\n");
-    printf("注意：请使用空格分隔数字和运算符\n");
-
-    while (1)
-    {
-        ShowMenu();
+    while (1) {
+        ShowExpressionMenu();
         scanf("%d", &choice);
         getchar(); // 清除输入缓冲区
 
         switch (choice)
         {
-        case 0:
-            printf("感谢使用表达式求值系统！\n");
-            return 0;
-
         case 1:
             printf("请输入中缀表达式: ");
             fgets(expression, sizeof(expression), stdin);
@@ -474,7 +640,7 @@ int main()
             }
             break;
 
-        case 2:
+        case 2: {
             printf("请输入后缀表达式: ");
             fgets(expression, sizeof(expression), stdin);
             expression[strcspn(expression, "\n")] = '\0'; // 去除换行符
@@ -482,6 +648,7 @@ int main()
             double result = EvaluatePostfix(expression);
             printf("计算结果: %.2f\n", result);
             break;
+        }
 
         case 3:
             printf("请输入中缀表达式: ");
@@ -515,6 +682,46 @@ int main()
             break;
 
         case 5:
+            return;
+
+        default:
+            printf("无效的选择，请重新输入！\n");
+            break;
+        }
+        printf("\n");
+    }
+}
+
+// 30. 主函数
+int main()
+{
+    int choice;
+
+    printf("栈的基本操作与进制转换系统\n");
+    printf("支持的运算符: +, -, *, /, ^, (, )\n");
+    printf("注意：请使用空格分隔数字和运算符\n");
+
+    while (1)
+    {
+        ShowMainMenu();
+        scanf("%d", &choice);
+        getchar(); // 清除输入缓冲区
+
+        switch (choice)
+        {
+        case 0:
+            printf("感谢使用栈的基本操作与进制转换系统！\n");
+            return 0;
+
+        case 1:
+            ExpressionEvaluationSystem();
+            break;
+
+        case 2:
+            NumberConversionSystem();
+            break;
+
+        case 3:
             system("cls"); // Windows系统清屏
             // system("clear"); // Linux/Mac系统清屏
             break;
