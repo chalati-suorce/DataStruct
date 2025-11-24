@@ -128,8 +128,7 @@ void freePatient(Patient* patient) {
     }
 }
 
-// 模拟挂号系统
-void hospitalRegistrationSystem() {
+int main() {
     Queue queue;
     initQueue(&queue);
     
@@ -228,7 +227,7 @@ void hospitalRegistrationSystem() {
                     freePatient(patient);
                 }
                 printf("系统已退出，感谢使用！\n");
-                return;
+                return 0;
             }
             
             default:
@@ -236,81 +235,6 @@ void hospitalRegistrationSystem() {
                 break;
         }
     }
-}
-
-// 测试函数 - 验证队列的正确性
-void testQueueFunctionality() {
-    printf("\n=== 队列功能测试 ===\n");
-    
-    Queue testQueue;
-    initQueue(&testQueue);
-    
-    // 测试1: 空队列操作
-    printf("测试1: 空队列操作\n");
-    Patient* p1 = dequeue(&testQueue); // 应该返回NULL
-    if (p1 == NULL) {
-        printf("✓ 空队列出队操作正确\n");
-    }
-    
-    // 测试2: 入队操作
-    printf("\n测试2: 入队操作\n");
-    Patient* patient1 = createPatient(1, "张三", 25, "感冒");
-    Patient* patient2 = createPatient(2, "李四", 30, "发烧");
-    Patient* patient3 = createPatient(3, "王五", 40, "头痛");
-    
-    enqueue(&testQueue, patient1);
-    enqueue(&testQueue, patient2);
-    enqueue(&testQueue, patient3);
-    
-    printf("✓ 入队操作完成，当前队列大小: %d\n", testQueue.size);
-    
-    // 测试3: 查看队首
-    printf("\n测试3: 查看队首\n");
-    Patient* frontPatient = peek(&testQueue);
-    if (frontPatient != NULL && frontPatient->id == 1) {
-        printf("✓ 队首病人正确: %s\n", frontPatient->name);
-    }
-    
-    // 测试4: 出队操作（先到先服务）
-    printf("\n测试4: 出队操作\n");
-    Patient* served1 = dequeue(&testQueue);
-    if (served1 != NULL && served1->id == 1) {
-        printf("✓ 第一个就诊病人正确: %s\n", served1->name);
-        freePatient(served1);
-    }
-    
-    Patient* served2 = dequeue(&testQueue);
-    if (served2 != NULL && served2->id == 2) {
-        printf("✓ 第二个就诊病人正确: %s\n", served2->name);
-        freePatient(served2);
-    }
-    
-    // 测试5: 剩余队列状态
-    printf("\n测试5: 剩余队列状态\n");
-    printf("当前队列大小: %d\n", testQueue.size);
-    displayQueue(&testQueue);
-    
-    // 清理剩余病人
-    while (!isEmpty(&testQueue)) {
-        Patient* patient = dequeue(&testQueue);
-        freePatient(patient);
-    }
-    
-    printf("\n✓ 所有测试完成，队列功能正常\n");
-}
-
-int main() {
-    printf("=== 链式队列挂号系统 ===\n");
-    
-    // 先运行功能测试
-    testQueueFunctionality();
-    
-    printf("\n按回车键开始挂号系统演示...");
-    getchar(); // 等待用户按键
-    getchar(); // 处理之前的换行符
-    
-    // 运行挂号系统
-    hospitalRegistrationSystem();
     
     return 0;
 }

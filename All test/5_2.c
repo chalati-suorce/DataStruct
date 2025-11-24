@@ -57,10 +57,65 @@ void PostOrderTraverse(BiTree T) {
     }
 }
 
+// 统计叶子结点个数
+int CountLeafNodes(BiTree T) {
+    if (T == NULL) {
+        return 0;
+    }
+    if (T->lchild == NULL && T->rchild == NULL) {
+        return 1;
+    }
+    return CountLeafNodes(T->lchild) + CountLeafNodes(T->rchild);
+}
+
+// 统计结点总数
+int CountNodes(BiTree T) {
+    if (T == NULL) {
+        return 0;
+    }
+    return 1 + CountNodes(T->lchild) + CountNodes(T->rchild);
+}
+
+// 查找二叉树中是否存在某个值的结点
+int SearchNode(BiTree T, char target) {
+    if (T == NULL) {
+        return 0;
+    }
+    if (T->data == target) {
+        return 1;
+    }
+    return SearchNode(T->lchild, target) || SearchNode(T->rchild, target);
+}
+
+// 交换二叉树所有结点的左右子树
+void SwapLeftRight(BiTree T) {
+    if (T == NULL) {
+        return;
+    }
+    // 交换左右子树
+    BiTree temp = T->lchild;
+    T->lchild = T->rchild;
+    T->rchild = temp;
+    
+    // 递归交换左右子树
+    SwapLeftRight(T->lchild);
+    SwapLeftRight(T->rchild);
+}
+
+// 求二叉树的深度
+int GetTreeDepth(BiTree T) {
+    if (T == NULL) {
+        return 0;
+    }
+    int leftDepth = GetTreeDepth(T->lchild);
+    int rightDepth = GetTreeDepth(T->rchild);
+    return (leftDepth > rightDepth ? leftDepth : rightDepth) + 1;
+}
 
 int main() {
     BiTree T = NULL;
     int choice;
+    char target;
     
     printf("二叉树建立与遍历程序\n");
     printf("请输入扩展先序遍历序列（用#表示空指针，回车结束输入）：\n");
@@ -74,8 +129,13 @@ int main() {
         printf("2. 中序遍历\n");
         printf("3. 后序遍历\n");
         printf("4. 所有遍历方式\n");
+        printf("5. 统计叶子结点个数\n");
+        printf("6. 统计结点总数\n");
+        printf("7. 查找结点\n");
+        printf("8. 交换左右子树\n");
+        printf("9. 求二叉树深度\n");
         printf("0. 退出程序\n");
-        printf("请输入选择（0-4）：");
+        printf("请输入选择（0-9）：");
         scanf("%d", &choice);
         
         // 清除输入缓冲区
@@ -111,6 +171,32 @@ int main() {
                 printf("后序遍历结果：");
                 PostOrderTraverse(T);
                 printf("\n");
+                break;
+            case 5:
+                printf("叶子结点个数：%d\n", CountLeafNodes(T));
+                break;
+            case 6:
+                printf("结点总数：%d\n", CountNodes(T));
+                break;
+            case 7:
+                printf("请输入要查找的字符：");
+                scanf("%c", &target);
+                while (getchar() != '\n'); // 清除输入缓冲区
+                if (SearchNode(T, target)) {
+                    printf("字符 '%c' 存在于二叉树中\n", target);
+                } else {
+                    printf("字符 '%c' 不存在于二叉树中\n", target);
+                }
+                break;
+            case 8:
+                SwapLeftRight(T);
+                printf("已交换所有结点的左右子树\n");
+                printf("交换后的先序遍历结果：");
+                PreOrderTraverse(T);
+                printf("\n");
+                break;
+            case 9:
+                printf("二叉树深度：%d\n", GetTreeDepth(T));
                 break;
             case 0:
                 printf("程序结束，感谢使用！\n");
