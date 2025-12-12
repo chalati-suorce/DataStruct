@@ -2,177 +2,339 @@
 #include <stdlib.h>
 #include <time.h>
 
-// 直接插入排序
-void insertionSort(int arr[], int n) {
-    int i, j, key;
-    for (i = 1; i < n; i++) {
-        key = arr[i];
-        j = i - 1;
+#define MAX_SIZE 10000
+
+// 全局变量
+int original[MAX_SIZE]; // 备份原始数据
+int arr[MAX_SIZE];      // 当前操作数组
+int tempArr[MAX_SIZE];  // 归并排序用的辅助数组
+int n = 0;              // 数据个数
+int print_steps = 1;    // 1: 打印每一趟结果, 0: 静默模式(用于效率比较)
+
+// --- 函数声明 ---
+void printMenu();
+void inputData();
+void resetArray();
+void printArray(const char* prefix);
+void swap(int *a, int *b);
+
+// 排序算法声明
+void DirectInsertSort();
+void BinaryInsertSort();
+void ShellSort();
+void BubbleSort();
+void QuickSort();
+void SelectSort();
+void HeapSort();
+void MergeSort();
+void EfficiencyCompare();
+
+// --- 主函数 ---
+int main() {
+    int choice;
+    srand((unsigned)time(NULL)); // 初始化随机数种子
+
+    while (1) {
+        printMenu();
+        printf("请选择：");
+        scanf("%d", &choice);
+
+        // 如果选择排序功能且没数据，提示录入
+        if (choice >= 2 && choice <= 9 && n == 0) {
+            printf("请先执行 [1] 录入数据！\n");
+            system("pause");
+            continue;
+        }
+
+        switch (choice) {
+            case 0: system("cls"); break;
+            case 1: inputData(); break;
+            case 2: resetArray(); DirectInsertSort(); break;
+            case 3: resetArray(); BinaryInsertSort(); break;
+            case 4: resetArray(); ShellSort(); break;
+            case 5: resetArray(); BubbleSort(); break;
+            case 6: resetArray(); QuickSort(); break;
+            case 7: resetArray(); SelectSort(); break;
+            case 8: resetArray(); HeapSort(); break;
+            case 9: resetArray(); MergeSort(); break;
+            case 10: EfficiencyCompare(); break;
+            case 886: printf("退出程序。\n"); return 0;
+            default: printf("输入错误，请重新选择。\n");
+        }
         
-        // 将比key大的元素向后移动
-        while (j >= 0 && arr[j] > key) {
-            arr[j + 1] = arr[j];
-            j = j - 1;
-        }
-        arr[j + 1] = key;
-    }
-}
-
-// 希尔排序
-void shellSort(int arr[], int n) {
-    // 使用希尔增量序列：n/2, n/4, ..., 1
-    for (int gap = n / 2; gap > 0; gap /= 2) {
-        // 对每个间隔进行插入排序
-        for (int i = gap; i < n; i++) {
-            int temp = arr[i];
-            int j;
-            
-            // 对间隔为gap的元素进行插入排序
-            for (j = i; j >= gap && arr[j - gap] > temp; j -= gap) {
-                arr[j] = arr[j - gap];
-            }
-            arr[j] = temp;
+        if (choice != 0 && choice != 1 && choice != 10) {
+            printf("\n排序完成，按回车键继续...");
+            getchar(); getchar();
         }
     }
+    return 0;
 }
 
-// 打印数组
-void printArray(int arr[], int n) {
+// --- 辅助函数 ---
+
+void printMenu() {
+    printf("        0 清    屏        \n");
+    printf("        1 录入数据        \n");
+    printf("        2 直接插入排序    \n");
+    printf("        3 折半插入排序    \n");
+    printf("        4 希尔排序        \n");
+    printf("        5 冒泡排序        \n");
+    printf("        6 快速排序        \n");
+    printf("        7 选择排序        \n");
+    printf("        8 堆排序          \n");
+    printf("        9 二路归并排序    \n");
+    printf("        10 效率比较       \n");
+    printf("        886 退   出       \n");
+}
+
+void inputData() {
+    printf("请输入数组元素的个数 (范围: [1, %d]): ", MAX_SIZE);
+    scanf("%d", &n);
+    if (n > MAX_SIZE || n < 1) {
+        printf("数量超出范围！\n"); n = 0; return;
+    }
+    printf("请输入%d个整数:\n", n);
     for (int i = 0; i < n; i++) {
-        printf("%d ", arr[i]);
+        scanf("%d", &original[i]);
     }
+    resetArray();
+    printf("数据录入完毕。\n");
+}
+
+void resetArray() {
+    for (int i = 0; i < n; i++) arr[i] = original[i];
+    print_steps = 1; // 默认开启打印
+}
+
+void printArray(const char* prefix) {
+    if (!print_steps) return; // 如果是静默模式，不打印
+    printf("%s", prefix);
+    for (int i = 0; i < n; i++) printf("%d ", arr[i]);
     printf("\n");
 }
 
-// 复制数组
-void copyArray(int source[], int dest[], int n) {
-    for (int i = 0; i < n; i++) {
-        dest[i] = source[i];
+void swap(int *a, int *b) {
+    int temp = *a; *a = *b; *b = temp;
+}
+
+// --- 2. 直接插入排序 ---
+void DirectInsertSort() {
+    printArray("原数组: ");
+    int i, j, temp;
+    for (i = 1; i < n; i++) {
+        if (arr[i] < arr[i - 1]) {
+            temp = arr[i];
+            for (j = i - 1; j >= 0 && arr[j] > temp; j--) {
+                arr[j + 1] = arr[j];
+            }
+            arr[j + 1] = temp;
+        }
+        if (print_steps) { printf("第%d趟排序后: ", i); printArray(""); }
     }
 }
 
-// 生成随机数组
-void generateRandomArray(int arr[], int n) {
-    for (int i = 0; i < n; i++) {
-        arr[i] = rand() % 1000; // 生成0-999的随机数
+// --- 3. 折半插入排序 ---
+void BinaryInsertSort() {
+    printArray("原数组: ");
+    int i, j, temp, low, high, mid;
+    for (i = 1; i < n; i++) {
+        temp = arr[i];
+        low = 0; high = i - 1;
+        while (low <= high) {
+            mid = (low + high) / 2;
+            if (arr[mid] > temp) high = mid - 1;
+            else low = mid + 1;
+        }
+        for (j = i - 1; j >= high + 1; j--) arr[j + 1] = arr[j];
+        arr[high + 1] = temp;
+        
+        if (print_steps) { printf("第%d趟排序后: ", i); printArray(""); }
     }
 }
 
-// 从键盘输入数组
-void inputArray(int arr[], int n) {
-    printf("请输入 %d 个整数:\n", n);
-    for (int i = 0; i < n; i++) {
-        printf("第 %d 个数: ", i + 1);
-        scanf("%d", &arr[i]);
+// --- 4. 希尔排序 ---
+void ShellSort() {
+    printArray("原数组: ");
+    int i, j, gap, temp, pass = 1;
+    for (gap = n / 2; gap > 0; gap /= 2) {
+        for (i = gap; i < n; i++) {
+            temp = arr[i];
+            for (j = i - gap; j >= 0 && arr[j] > temp; j -= gap)
+                arr[j + gap] = arr[j];
+            arr[j + gap] = temp;
+        }
+        if (print_steps) { printf("第%d趟(增量%d): ", pass++, gap); printArray(""); }
     }
 }
 
-int main() {
-    int choice, n;
+// --- 5. 冒泡排序 ---
+void BubbleSort() {
+    printArray("原数组: ");
+    int i, j, flag;
+    for (i = 0; i < n - 1; i++) {
+        flag = 0;
+        for (j = 0; j < n - 1 - i; j++) {
+            if (arr[j] > arr[j + 1]) {
+                swap(&arr[j], &arr[j + 1]);
+                flag = 1;
+            }
+        }
+        if (print_steps) { printf("第%d趟排序后: ", i + 1); printArray(""); }
+        if (flag == 0) break; // 优化：如果一趟没有交换，说明已经有序
+    }
+}
+
+// --- 6. 快速排序 ---
+int Partition(int low, int high) {
+    int pivot = arr[low];
+    while (low < high) {
+        while (low < high && arr[high] >= pivot) high--;
+        arr[low] = arr[high];
+        while (low < high && arr[low] <= pivot) low++;
+        arr[high] = arr[low];
+    }
+    arr[low] = pivot;
+    return low;
+}
+
+void QSort(int low, int high) {
+    if (low < high) {
+        int pivotLoc = Partition(low, high);
+        // 递归调用
+        QSort(low, pivotLoc - 1);
+        QSort(pivotLoc + 1, high);
+    }
+}
+
+void QuickSort() {
+    printArray("原数组: ");
+    QSort(0, n - 1);
+    printArray("最终结果: "); // 递归过程不好打印每一趟，直接打印结果
+}
+
+// --- 7. 选择排序 ---
+void SelectSort() {
+    printArray("原数组: ");
+    int i, j, minIdx;
+    for (i = 0; i < n - 1; i++) {
+        minIdx = i;
+        for (j = i + 1; j < n; j++) {
+            if (arr[j] < arr[minIdx]) minIdx = j;
+        }
+        if (minIdx != i) swap(&arr[i], &arr[minIdx]);
+        
+        if (print_steps) { printf("第%d趟排序后: ", i + 1); printArray(""); }
+    }
+}
+
+// --- 8. 堆排序 ---
+void HeapAdjust(int s, int m) {
+    int rc = arr[s];
+    for (int j = 2 * s + 1; j <= m; j = j * 2 + 1) { // 0-based index: 左孩子是 2*s+1
+        if (j < m && arr[j] < arr[j + 1]) j++;
+        if (rc >= arr[j]) break;
+        arr[s] = arr[j]; s = j;
+    }
+    arr[s] = rc;
+}
+
+void HeapSort() {
+    printArray("原数组: ");
+    // 建堆
+    for (int i = n / 2 - 1; i >= 0; i--) HeapAdjust(i, n - 1);
+    
+    // 排序
+    for (int i = n - 1; i > 0; i--) {
+        swap(&arr[0], &arr[i]);
+        HeapAdjust(0, i - 1);
+        if (print_steps) { printf("第%d趟排序后: ", n - i); printArray(""); }
+    }
+}
+
+// --- 9. 二路归并排序 ---
+void Merge(int low, int mid, int high) {
+    int i = low, j = mid + 1, k = 0;
+    while (i <= mid && j <= high) {
+        if (arr[i] <= arr[j]) tempArr[k++] = arr[i++];
+        else tempArr[k++] = arr[j++];
+    }
+    while (i <= mid) tempArr[k++] = arr[i++];
+    while (j <= high) tempArr[k++] = arr[j++];
+    
+    for (i = 0; i < k; i++) arr[low + i] = tempArr[i];
+}
+
+void MSort(int low, int high) {
+    if (low < high) {
+        int mid = (low + high) / 2;
+        MSort(low, mid);
+        MSort(mid + 1, high);
+        Merge(low, mid, high);
+    }
+}
+
+void MergeSort() {
+    printArray("原数组: ");
+    MSort(0, n - 1);
+    printArray("最终结果: ");
+}
+
+// --- 10. 效率比较 ---
+void EfficiencyCompare() {
+    printf("\n正在生成 5000 个随机数用于效率测试...\n");
+    int testN = 5000;
+    // 临时备份 n 和 original
+    int savedN = n;
+    int savedOriginal[MAX_SIZE];
+    for(int i=0; i<n; i++) savedOriginal[i] = original[i];
+
+    // 生成随机数据
+    n = testN;
+    for(int i=0; i<n; i++) original[i] = rand() % 10000;
+
+    print_steps = 0; // 关闭打印，只测时间
     clock_t start, end;
-    double cpu_time_used;
+    double duration;
+
+    printf("\n%-15s\t%-15s\n", "排序算法", "耗时(ms)");
+
+    // 1. 直接插入
+    resetArray(); start = clock(); DirectInsertSort(); end = clock();
+    printf("%-15s\t%.2f ms\n", "直接插入排序", (double)(end - start));
+
+    // 2. 折半插入
+    resetArray(); start = clock(); BinaryInsertSort(); end = clock();
+    printf("%-15s\t%.2f ms\n", "折半插入排序", (double)(end - start));
+
+    // 3. 希尔
+    resetArray(); start = clock(); ShellSort(); end = clock();
+    printf("%-15s\t%.2f ms\n", "希尔排序", (double)(end - start));
+
+    // 4. 冒泡
+    resetArray(); start = clock(); BubbleSort(); end = clock();
+    printf("%-15s\t%.2f ms\n", "冒泡排序", (double)(end - start));
+
+    // 5. 快速
+    resetArray(); start = clock(); QuickSort(); end = clock();
+    printf("%-15s\t%.2f ms\n", "快速排序", (double)(end - start));
+
+    // 6. 选择
+    resetArray(); start = clock(); SelectSort(); end = clock();
+    printf("%-15s\t%.2f ms\n", "选择排序", (double)(end - start));
+
+    // 7. 堆排序
+    resetArray(); start = clock(); HeapSort(); end = clock();
+    printf("%-15s\t%.2f ms\n", "堆排序", (double)(end - start));
+
+    // 8. 归并
+    resetArray(); start = clock(); MergeSort(); end = clock();
+    printf("%-15s\t%.2f ms\n", "归并排序", (double)(end - start));
+
+    // 恢复原来的数据
+    n = savedN;
+    for(int i=0; i<n; i++) original[i] = savedOriginal[i];
+    print_steps = 1;
     
-    printf("=== 排序算法比较程序 ===\n");
-    printf("1. 手动输入数据进行排序\n");
-    printf("2. 自动生成数据进行性能比较\n");
-    printf("请选择模式 (1 或 2): ");
-    scanf("%d", &choice);
-    
-    if (choice == 1) {
-        printf("请输入要排序的元素个数: ");
-        scanf("%d", &n);
-        
-        int *arr = (int*)malloc(n * sizeof(int));
-        int *arr_copy = (int*)malloc(n * sizeof(int));
-        
-        if (arr == NULL || arr_copy == NULL) {
-            printf("内存分配失败!\n");
-            return 1;
-        }
-        
-        // 输入数据
-        inputArray(arr, n);
-        
-        printf("\n原始数组: ");
-        printArray(arr, n);
-        
-        // 直接插入排序
-        copyArray(arr, arr_copy, n);
-        start = clock();
-        insertionSort(arr_copy, n);
-        end = clock();
-        cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
-        
-        printf("\n直接插入排序结果: ");
-        printArray(arr_copy, n);
-        printf("排序耗时: %f 秒\n", cpu_time_used);
-        
-        // 希尔排序
-        copyArray(arr, arr_copy, n);
-        start = clock();
-        shellSort(arr_copy, n);
-        end = clock();
-        cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
-        
-        printf("\n希尔排序结果: ");
-        printArray(arr_copy, n);
-        printf("排序耗时: %f 秒\n", cpu_time_used);
-        
-        free(arr);
-        free(arr_copy);
-        
-    } else if (choice == 2) {
-        printf("请输入要生成的测试数据规模: ");
-        scanf("%d", &n);
-        
-        int *arr = (int*)malloc(n * sizeof(int));
-        int *arr_copy = (int*)malloc(n * sizeof(int));
-        
-        if (arr == NULL || arr_copy == NULL) {
-            printf("内存分配失败!\n");
-            return 1;
-        }
-        
-        // 生成随机数据
-        srand(time(NULL));
-        generateRandomArray(arr, n);
-        
-        printf("\n生成 %d 个随机数进行性能测试...\n", n);
-        
-        // 测试直接插入排序性能
-        copyArray(arr, arr_copy, n);
-        start = clock();
-        insertionSort(arr_copy, n);
-        end = clock();
-        double insertion_time = ((double)(end - start)) / CLOCKS_PER_SEC;
-        
-        // 测试希尔排序性能
-        copyArray(arr, arr_copy, n);
-        start = clock();
-        shellSort(arr_copy, n);
-        end = clock();
-        double shell_time = ((double)(end - start)) / CLOCKS_PER_SEC;
-        
-        printf("\n=== 性能比较结果 ===\n");
-        printf("数据规模: %d 个元素\n", n);
-        printf("直接插入排序耗时: %f 秒\n", insertion_time);
-        printf("希尔排序耗时: %f 秒\n", shell_time);
-        printf("性能提升: %.2f%%\n", (insertion_time - shell_time) / insertion_time * 100);
-        
-        // 显示前10个元素验证排序正确性
-        printf("\n排序后前10个元素: ");
-        for (int i = 0; i < 10 && i < n; i++) {
-            printf("%d ", arr_copy[i]);
-        }
-        printf("\n");
-        
-        free(arr);
-        free(arr_copy);
-        
-    } else {
-        printf("无效的选择!\n");
-        return 1;
-    }
-    
-    return 0;
+    printf("\n测试完成。按回车返回菜单...");
+    getchar(); getchar();
 }

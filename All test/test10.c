@@ -2,14 +2,14 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX_VALUE 10000 // 用于查找最小值的初始化大数
+#define MAX_VALUE 10000
 
-// 哈夫曼树结点结构
+
 typedef struct {
-    int weight;     // 权值
-    int parent;     // 父结点下标
-    int lchild;     // 左孩子下标
-    int rchild;     // 右孩子下标
+    int weight; 
+    int parent;  
+    int lchild;    
+    int rchild;    
 } HTNode, *HuffmanTree;
 
 typedef char **HuffmanCode;
@@ -22,7 +22,6 @@ void Select(HuffmanTree HT, int end, int *s1, int *s2) {
     *s1 = 0;
     *s2 = 0;
 
-    // 第一次遍历，找最小 (s1)
     for (int i = 1; i <= end; i++) {
         if (HT[i].parent == 0 && HT[i].weight < min1) {
             min1 = HT[i].weight;
@@ -30,7 +29,6 @@ void Select(HuffmanTree HT, int end, int *s1, int *s2) {
         }
     }
 
-    // 第二次遍历，找次小 (s2)
     for (int i = 1; i <= end; i++) {
         if (HT[i].parent == 0 && i != *s1 && HT[i].weight < min2) {
             min2 = HT[i].weight;
@@ -39,13 +37,12 @@ void Select(HuffmanTree HT, int end, int *s1, int *s2) {
     }
 }
 
-// 构造哈夫曼树
+// 构造哈夫曼树（以结点值左小右大的原则）
 void CreateHuffmanTree(HuffmanTree *HT, int *w, int n) {
     if (n <= 1) return;
-    int m = 2 * n - 1; // 结点总数
+    int m = 2 * n - 1;
     *HT = (HuffmanTree)malloc((m + 1) * sizeof(HTNode)); 
 
-    // 初始化前 n 个单元（叶子结点）
     for (int i = 1; i <= n; i++) {
         (*HT)[i].weight = w[i - 1];
         (*HT)[i].parent = 0;
@@ -53,7 +50,6 @@ void CreateHuffmanTree(HuffmanTree *HT, int *w, int n) {
         (*HT)[i].rchild = 0;
     }
 
-    // 初始化后 m-n 个单元
     for (int i = n + 1; i <= m; i++) {
         (*HT)[i].weight = 0;
         (*HT)[i].parent = 0;
@@ -61,15 +57,20 @@ void CreateHuffmanTree(HuffmanTree *HT, int *w, int n) {
         (*HT)[i].rchild = 0;
     }
 
-    // 构建树
     int s1, s2;
     for (int i = n + 1; i <= m; i++) {
         Select(*HT, i - 1, &s1, &s2);
+
+        if ((*HT)[s1].weight > (*HT)[s2].weight) {
+            int temp = s1;
+            s1 = s2;
+            s2 = temp;
+        }
         
         (*HT)[s1].parent = i;
         (*HT)[s2].parent = i;
-        (*HT)[i].lchild = s1;
-        (*HT)[i].rchild = s2;
+        (*HT)[i].lchild = s1;  // 左孩子为权值较小的
+        (*HT)[i].rchild = s2;  // 右孩子为权值较大的
         (*HT)[i].weight = (*HT)[s1].weight + (*HT)[s2].weight;
     }
 }
@@ -102,36 +103,104 @@ void CreateHuffmanCode(HuffmanTree HT, HuffmanCode *HC, int n) {
     free(cd);
 }
 
+// 打印哈夫曼树形态（以缩进方式显示）
+void PrintHuffmanTree(HuffmanTree HT, int root, int level) {
+    if (root == 0) return;
+
+    PrintHuffmanTree(HT, HT[root].rchild, level + 1);
+    
+    for (int i = 0; i < level; i++) {
+        printf("    ");
+    }
+    
+    if (HT[root].lchild == 0 && HT[root].rchild == 0) {
+        printf("叶结点[%d]: %d\n", root, HT[root].weight);
+    } else {
+        printf("内部结点[%d]: %d\n", root, HT[root].weight);
+    }
+
+    PrintHuffmanTree(HT, HT[root].lchild, level + 1);
+}
+
+// 计算WPL（带权路径长度）
+int CalculateWPL(HuffmanTree HT, HuffmanCode HC, int n) {
+    int wpl = 0;
+    for (int i = 1; i <= n; i++) {
+        int len = strlen(HC[i]);
+        wpl += HT[i].weight * len;
+    }
+    return wpl;
+}
+
+// 计算WPL的递归方法（从根结点开始）
+int CalculateWPLRecursive(HuffmanTree HT, int root, int depth) {
+    if (root == 0) return 0;
+
+    if (HT[root].lchild == 0 && HT[root].rchild == 0) {
+        return HT[root].weight * depth;
+    }
+
+    return CalculateWPLRecursive(HT, HT[root].lchild, depth + 1) + 
+           CalculateWPLRecursive(HT, HT[root].rchild, depth + 1);
+}
+
 int main() {
     HuffmanTree HT;
     HuffmanCode HC;
     int n;
 
-    // 1. 输入部分：严格模仿截图格式
+    printf(" 哈夫曼树构造与编码 \n\n");
+    
     printf("输入节点的个数:\n");
     if(scanf("%d", &n) != 1) return 0;
 
     int *weights = (int *)malloc(n * sizeof(int));
     for (int i = 0; i < n; i++) {
-        printf("输入第%d个叶节点的权值:\n", i);
+        printf("输入第%d个叶节点的权值:\n", i + 1);
         scanf("%d", &weights[i]);
     }
 
-    // 2. 核心算法调用
+    printf("\n 构造哈夫曼树 \n");
+    
     CreateHuffmanTree(&HT, weights, n);
+    
+
+    printf("\n哈夫曼树形态（左小右大原则）：\n");
+    printf("说明：缩进表示层级，右子树在上，左子树在下\n");
+    PrintHuffmanTree(HT, 2 * n - 1, 0); 
+
     CreateHuffmanCode(HT, &HC, n);
 
-    // 3. 输出部分：只输出编码
-    printf("哈夫曼编码:\n");
+    printf("\n哈夫曼编码:\n");
     for (int i = 1; i <= n; i++) {
-        printf("%s\n", HC[i]);
+        printf("权值 %d 的编码: %s\n", HT[i].weight, HC[i]);
     }
 
-    // 4. 模拟系统暂停
-    // 这会在 Windows 命令行显示 "Press any key to continue . . ."
+    printf("\n 计算WPL（带权路径长度） \n");
+
+    int wpl1 = CalculateWPL(HT, HC, n);
+    printf("方法1（通过编码计算）: WPL = %d\n", wpl1);
+
+    int wpl2 = CalculateWPLRecursive(HT, 2 * n - 1, 0);
+    printf("方法2（递归计算）: WPL = %d\n", wpl2);
+
+    if (wpl1 == wpl2) {
+        printf("验证: 两种计算方法结果一致，WPL = %d\n", wpl1);
+    } else {
+        printf("警告: 两种计算方法结果不一致！\n");
+    }
+    
+    printf("\n详细计算过程:\n");
+    for (int i = 1; i <= n; i++) {
+        int len = strlen(HC[i]);
+        printf("权值 %d × 编码长度 %d = %d", HT[i].weight, len, HT[i].weight * len);
+        if (i < n) printf(" + ");
+    }
+    printf(" = %d\n", wpl1);
+
+    printf("\n程序执行完成！\n");
     system("pause");
 
-    // 释放内存
     free(weights);
     free(HT);
     for(int i = 1; i <= n; i++) free(HC[i]);
