@@ -4,21 +4,18 @@
 
 #define MAX_SIZE 10000
 
-// 全局变量
-int original[MAX_SIZE]; // 备份原始数据
-int arr[MAX_SIZE];      // 当前操作数组
-int tempArr[MAX_SIZE];  // 归并排序用的辅助数组
-int n = 0;              // 数据个数
-int print_steps = 1;    // 1: 打印每一趟结果, 0: 静默模式(用于效率比较)
+int original[MAX_SIZE];
+int arr[MAX_SIZE];
+int tempArr[MAX_SIZE];
+int n = 0;
+int print_steps = 1;
 
-// --- 函数声明 ---
 void printMenu();
 void inputData();
 void resetArray();
 void printArray(const char* prefix);
 void swap(int *a, int *b);
 
-// 排序算法声明
 void DirectInsertSort();
 void BinaryInsertSort();
 void ShellSort();
@@ -32,14 +29,13 @@ void EfficiencyCompare();
 // --- 主函数 ---
 int main() {
     int choice;
-    srand((unsigned)time(NULL)); // 初始化随机数种子
+    srand((unsigned)time(NULL)); 
 
     while (1) {
         printMenu();
         printf("请选择：");
         scanf("%d", &choice);
 
-        // 如果选择排序功能且没数据，提示录入
         if (choice >= 2 && choice <= 9 && n == 0) {
             printf("请先执行 [1] 录入数据！\n");
             system("pause");
@@ -281,8 +277,8 @@ void MergeSort() {
 
 // --- 10. 效率比较 ---
 void EfficiencyCompare() {
-    printf("\n正在生成 5000 个随机数用于效率测试...\n");
-    int testN = 5000;
+    printf("\n正在生成 50 个随机数用于效率测试...\n");
+    int testN = 50;
     // 临时备份 n 和 original
     int savedN = n;
     int savedOriginal[MAX_SIZE];
