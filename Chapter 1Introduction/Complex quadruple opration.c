@@ -12,6 +12,22 @@
 选作内容：实现复数的其他运算，如相除、求共轭等。
 */
 #include<stdio.h>
+#include<string.h>
+
+#define MAXSIZE 100
+
+typedef int elemtype;
+
+typedef struct
+{
+    elemtype data[MAXSIZE];
+    int length;
+}Seqlist;
+
+void transtion{
+    
+}
+
 int main(){
     
     return 0;

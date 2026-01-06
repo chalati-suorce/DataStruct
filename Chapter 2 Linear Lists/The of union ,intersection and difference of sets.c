@@ -12,3 +12,18 @@
 实现集合混合运算表达式求值。
 推广元素类型到其他类型。
 */
+#include<stdio.h>
+
+#define MAX 100 
+
+typedef int elem;
+
+typedef struct{
+    elem data[MAX];
+    int length;
+}Sqllist;
+
+int main(){
+
+    return 0;
+}
